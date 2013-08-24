@@ -24,7 +24,23 @@ use Import::Into;
 
 sub import {
   my ($class, @imports) = @_;
-  my %params = map {; ($_ =~ s/^://r) => 1 } @imports;
+
+  state $known = +{ 
+    map {; $_ => 1 } qw/
+      all
+      autobox_lists 
+    /
+  };
+
+  my %params = map {; 
+    my $opt = lc($_ =~ s/^://r);
+    die "$class does not export $opt" unless $known->{$opt};
+    $opt => 1
+  } @imports;
+
+  if (delete $params{all}) {
+    $params{$_} = 1 for grep {; $_ ne 'all' } keys %$known
+  }
 
   my $pkg = caller;
 
@@ -57,9 +73,7 @@ sub import {
   PerlX::Maybe->import::into($pkg, qw/maybe provided/);
 
   my @lowu = qw/array hash immarray/;
-  push @lowu, 'autobox' 
-    if defined $params{autobox_lists}
-    or defined $params{autoboxed_lists};
+  push @lowu, 'autobox' if defined $params{autobox_lists};
   List::Objects::WithUtils->import::into($pkg, @lowu);
 
   List::Objects::Types->import::into($pkg, '-all');
