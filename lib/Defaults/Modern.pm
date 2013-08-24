@@ -13,8 +13,11 @@ use Path::Tiny           ();
 use Try::Tiny            ();
 use Types::Standard      ();
 
+use PerlX::Maybe         ();
+
 use List::Objects::Types ();
 use List::Objects::WithUtils ();
+
 
 use Import::Into;
 
@@ -45,6 +48,8 @@ sub import {
   Function::Parameters->import::into($caller);
   Path::Tiny->import::into($caller, 'path');
   Try::Tiny->import::into($caller);
+
+  PerlX::Maybe->import::into($caller, qw/maybe provided/);
 
   my @lowu = qw/array hash immarray/;
   push @lowu, 'autobox' 
@@ -95,7 +100,8 @@ When you C<use Defaults::Modern>, you get:
 
 =item *
 
-L<strict> and fatal L<warnings> except for C<once>
+L<strict> and fatal L<warnings> except for C<once>; additionally disallow
+L<bareword::filehandles>
 
 =item *
 
@@ -131,6 +137,10 @@ B<try> and B<catch> from L<Try::Tiny>
 =item *
 
 B<path> from L<Path::Tiny>
+
+=item *
+
+B<maybe> from L<PerlX::Maybe>
 
 =item *
 

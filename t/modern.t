@@ -2,20 +2,25 @@ use Test::More;
 
 use Defaults::Modern;
 
-# Carp
+# Imports
+#  Carp
 can_ok __PACKAGE__, qw/ carp croak confess /;
+  
+#  List::Objects::WithUtils
+can_ok __PACKAGE__, qw/ array immarray hash /;
 
-# Scalar::Util
-can_ok __PACKAGE__, qw/ blessed reftype weaken /;
-
-# Path::Tiny
+#  Path::Tiny
 can_ok __PACKAGE__, qw/ path /;
 
-# Try::Catch
+#  PerlX::Maybe
+can_ok __PACKAGE__, qw/ maybe provided /;
+
+#  Scalar::Util
+can_ok __PACKAGE__, qw/ blessed reftype weaken /;
+
+#  Try::Catch
 can_ok __PACKAGE__, qw/ try catch /;
-  
-# List::Objects::WithUtils
-can_ok __PACKAGE__, qw/ array immarray hash /;
+
 
 ok not(eval 'open F, __FILE__'), 'bareword fh eval failed ok';
 ok $@, 'bareword fh died ok';
