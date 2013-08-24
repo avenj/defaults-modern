@@ -34,7 +34,8 @@ sub import {
 
   my %params = map {; 
     my $opt = lc($_ =~ s/^://r);
-    die "$class does not export $opt" unless $known->{$opt};
+    Carp::croak "$class does not export $opt" 
+      unless $known->{$opt};
     $opt => 1
   } @imports;
 
