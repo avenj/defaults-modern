@@ -78,7 +78,7 @@ sub import {
   List::Objects::WithUtils->import::into($pkg, @lowu);
 
   List::Objects::Types->import::into($pkg, '-all');
-  Types::Standard->import::into($pkg, '-types');
+  Types::Standard->import::into($pkg, '-all');
 
   $class
 }
