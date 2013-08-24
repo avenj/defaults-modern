@@ -1,14 +1,12 @@
 package Defaults::Modern;
-
+use v5.14;
 use strict; use warnings FATAL => 'all';
 no bareword::filehandles;
 
-use v5.14;
 use Carp;
-
 use Scalar::Util ();
-
 use feature ();
+use true    ();
 
 use Function::Parameters ();
 use Path::Tiny           ();
@@ -21,7 +19,6 @@ use List::Objects::WithUtils ();
 use Import::Into;
 
 sub import {
-  my $class  = shift;
   my $caller = caller;
 
   Carp->import::into($caller,
@@ -39,6 +36,8 @@ sub import {
 
   feature->import(':5.14');
   feature->unimport('switch');
+
+  true->import;
 
   Function::Parameters->import::into($caller);
   Path::Tiny->import::into($caller, 'path');
@@ -60,15 +59,27 @@ sub import {
 
 =head1 NAME
 
-Defaults::Modern - A lightweight approach to modern syntax
+Defaults::Modern - Yet another approach to modernistic Perl
 
 =head1 SYNOPSIS
 
   use Defaults::Modern;
 
+  # Small example ...
+  # Function::Parameters + List::Objects::WithUtils + types ->
+  fun to_immutable ( (ArrayRef | ArrayObj) $arr ) {
+    my $immutable = immarray( blessed $arr ? $arr->all : @$arr );
+    confess "No items in array!" unless $immutable->has_any;
+    $immutable
+  }
+
+  # See DESCRIPTION for complete details on imported functionality.
+
 =head1 DESCRIPTION
 
-A light-weight approach to writing modern Perl.
+Yet another approach to writing Perl in a modern style.
+
+. . . also saves me extensive typing ;-)
 
 When you C<use Defaults::Modern>, you get:
 
@@ -113,14 +124,20 @@ B<try> and B<catch> from L<Try::Tiny>
 
 B<path> from L<Path::Tiny>
 
+=item *
+
+L<true>
+
 =back
 
 Uses L<Import::Into> to provide B<import>; see the L<Import::Into>
-documentation for details on extending the importer.
+documentation for details.
 
 =head1 AUTHOR
 
 Jon Portnoy <avenj@cobaltirc.org>
+
+Inspired by L<Defaults::Mauke>
 
 =cut
 
