@@ -71,7 +71,16 @@ package My::Foo {
   use Defaults::Modern 'autobox_lists';
 
   ok []->count == array->count, 'ARRAY autoboxed ok';
-  ok +{}->keys->count == hash->keys->count, 'HASH autoboxed ok';
+  ok +{}->keys->count == 0, 'HASH autoboxed ok';
+  ok +{foo => 1}->inflate->foo == 1, 'autoboxed ->inflate ok';
+}
+
+# 'all' import tag
+package My::Bar {
+  use Test::More;
+  use Defaults::Modern ':all';
+
+  ok []->count == 0, ':all import tag ok';
 }
 
 # define
