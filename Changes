@@ -1,5 +1,17 @@
-Revision history for Perl module Modernism
+Revision history for Perl module Defaults::Modern
+
+0.002001 2013-08-24
+
+  - Add 'no indirect'
+
+  - Add 'define' keyword based on PerlX::Define
+
+  - Add 'maybe' and 'provided' from PerlX::Maybe
+
+  - Add optional list autoboxing support via import tag 'autobox_lists'
+
+  - POD/test improvements
 
 0.001001 2013-08-24
 
-   - Initial release
+  - Initial release
