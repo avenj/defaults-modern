@@ -1,6 +1,6 @@
 # NAME
 
-Defaults::Modern - A lightweight approach to modern syntax
+Defaults::Modern - Yet another approach to modernistic Perl
 
 # SYNOPSIS
 
@@ -36,9 +36,10 @@ When you `use Defaults::Modern`, you get:
 in combination with [Function::Parameters](http://search.cpan.org/perldoc?Function::Parameters)
 - __try__ and __catch__ from [Try::Tiny](http://search.cpan.org/perldoc?Try::Tiny)
 - __path__ from [Path::Tiny](http://search.cpan.org/perldoc?Path::Tiny)
+- [true](http://search.cpan.org/perldoc?true)
 
 Uses [Import::Into](http://search.cpan.org/perldoc?Import::Into) to provide __import__; see the [Import::Into](http://search.cpan.org/perldoc?Import::Into)
-documentation for details on extending the importer.
+documentation for details.
 
 # AUTHOR
 
