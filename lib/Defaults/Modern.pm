@@ -100,6 +100,9 @@ Defaults::Modern - Yet another approach to modernistic Perl
   # Optionally autobox list-type refs via List::Objects::WithUtils ->
   use Defaults::Modern 'autobox_lists';
 
+  my $obj = +{ foo => 'bar', baz => 'quux' }->inflate;
+  my $baz = $obj->baz;
+
   # See DESCRIPTION for complete details on imported functionality.
 
 =head1 DESCRIPTION
@@ -172,6 +175,31 @@ via L<List::Objects::WithUtils>.
 
 Uses L<Import::Into> to provide B<import>; see the L<Import::Into>
 documentation for details.
+
+=head1 SEE ALSO
+
+This package just glues together useful parts of CPAN, the
+most visible portions of which come from the following modules:
+
+L<Carp>
+
+L<Function::Parameters>
+
+L<List::Objects::WithUtils>
+
+L<List::Objects::Types>
+
+L<Path::Tiny>
+
+L<PerlX::Maybe>
+
+L<Scalar::Util>
+
+L<Try::Tiny>
+
+L<Types::Standard>
+
+L<Type::Tiny>
 
 =head1 AUTHOR
 
