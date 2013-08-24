@@ -97,7 +97,7 @@ Defaults::Modern - Yet another approach to modernistic Perl
     $arr->sliced( 0 .. ARRAY_MAX )
   }
 
-  # Optionally utobox list-type refs via List::Objects::WithUtils ->
+  # Optionally autobox list-type refs via List::Objects::WithUtils ->
   use Defaults::Modern 'autobox_lists';
 
   # See DESCRIPTION for complete details on imported functionality.
@@ -119,16 +119,16 @@ L<bareword::filehandles> and L<indirect> method calls
 
 =item *
 
-The C<v5.14> feature set (state, say, unicode_strings, array_base) except for
-C<switch>
+The C<v5.14> feature set (state, say, unicode_strings, array_base) -- except for
+C<switch>, which is deprecated in newer perls
 
 =item *
 
-B<carp>, B<croak>, and B<confess> from L<Carp>
+B<carp>, B<croak>, and B<confess> error reporting tools from L<Carp>
 
 =item *
 
-B<blessed>, B<reftype>, and B<weaken> from L<Scalar::Util>
+B<blessed>, B<reftype>, and B<weaken> utilities from L<Scalar::Util>
 
 =item *
 
@@ -137,12 +137,13 @@ L<List::Objects::WithUtils>
 
 =item *
 
-B<fun> and B<method> from L<Function::Parameters>
+B<fun> and B<method> keywords from L<Function::Parameters>
 
 =item *
 
 The full L<Types::Standard> set and L<List::Objects::Types>, which are useful
-in combination with L<Function::Parameters>
+in combination with L<Function::Parameters> (see the L</SYNOPSIS> and
+L<Function::Parameters> POD)
 
 =item *
 
@@ -150,19 +151,19 @@ B<try> and B<catch> from L<Try::Tiny>
 
 =item *
 
-B<path> from L<Path::Tiny>
+The B<path> object constructor from L<Path::Tiny>
 
 =item *
 
-B<maybe> and B<provided> from L<PerlX::Maybe>
+B<maybe> and B<provided> definedness-checking syntax sugar from L<PerlX::Maybe>
 
 =item *
 
-A B<define> keyword for defining constants
+A B<define> keyword for defining constants based on L<PerlX::Define>
 
 =item *
 
-L<true> to avoid adding '1;' to all of your modules
+L<true> so you can skip adding '1;' to all of your modules
 
 =back
 
