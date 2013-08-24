@@ -138,6 +138,9 @@ L<true>
 
 =back
 
+If you import C<autobox_lists>, ARRAY and HASH type references are autoboxed
+via L<List::Objects::WithUtils>.
+
 Uses L<Import::Into> to provide B<import>; see the L<Import::Into>
 documentation for details.
 
