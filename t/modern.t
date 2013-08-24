@@ -2,10 +2,6 @@ use Test::More;
 
 use Defaults::Modern;
 
-define FOO = 'bar';
-
-ok FOO eq 'bar', 'define ok';
-
 # Imports
 #  Carp
 can_ok __PACKAGE__, qw/ carp croak confess /;
@@ -53,5 +49,8 @@ package My::Foo {
   ok []->count == array->count, 'ARRAY autoboxed ok';
   ok +{}->keys->count == hash->keys->count, 'HASH autoboxed ok';
 }
+
+define FOO = 'bar';
+ok FOO eq 'bar', 'define ok';
 
 done_testing;
