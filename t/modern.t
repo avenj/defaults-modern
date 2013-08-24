@@ -25,6 +25,15 @@ can_ok __PACKAGE__, qw/ try catch /;
 use lib 't/inc';
 use_ok 'PkgTrue';
 
+# no indirect
+package 
+  Bar { 
+    sub foo { 1 } 
+}
+ok not(eval 'foo Bar'), 'indirect eval failed ok';
+ok $@, 'indirect method call died ok';
+cmp_ok $@, '=~', qr/indirect/i, 'indirect method call threw exception ok';
+
 # no bareword::filehandles
 ok not(eval 'open F, __FILE__'), 'bareword fh eval failed ok';
 ok $@, 'bareword fh died ok';

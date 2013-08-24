@@ -2,6 +2,7 @@ package Defaults::Modern;
 use v5.14;
 use strict; use warnings FATAL => 'all';
 no bareword::filehandles;
+no indirect ':fatal';
 
 use Carp;
 use Scalar::Util ();
@@ -41,7 +42,9 @@ sub import {
   strict->import;
   warnings->import(FATAL => 'all');
   warnings->unimport('once');
+
   bareword::filehandles->unimport;
+  indirect->unimport(':fatal');
 
   feature->import(':5.14');
   feature->unimport('switch');
@@ -112,7 +115,7 @@ When you C<use Defaults::Modern>, you get:
 =item *
 
 L<strict> and fatal L<warnings> except for C<once>; additionally disallow
-L<bareword::filehandles>
+L<bareword::filehandles> and L<indirect> method calls
 
 =item *
 
