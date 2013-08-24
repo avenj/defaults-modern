@@ -37,8 +37,7 @@ ok calc( 1, 0.5 ) == 1.5, 'Function::Parameters imported ok';
 fun frob (ArrayObj $arr) { $arr->count }
 ok frob( array(1,2,3) ) == 3, 'List::Objects::Types imported ok';
 
-{ package
-  T::Foo;
+package My::Foo {
   use Test::More;
   use Defaults::Modern 'autobox_lists';
 
