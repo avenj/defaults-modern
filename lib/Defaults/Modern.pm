@@ -19,7 +19,10 @@ use List::Objects::WithUtils ();
 use Import::Into;
 
 sub import {
+  my (undef, @imports) = @_;
   my $caller = caller;
+
+  my %params = map {; $_ => 1 } @imports;
 
   Carp->import::into($caller,
     qw/carp croak confess/,
@@ -43,9 +46,11 @@ sub import {
   Path::Tiny->import::into($caller, 'path');
   Try::Tiny->import::into($caller);
 
-  List::Objects::WithUtils->import::into($caller,
-    qw/array hash immarray/
-  );
+  my @lowu = qw/array hash immarray/;
+  push @lowu, 'autobox' 
+    if defined $params{autobox_lists}
+    or defined $params{autoboxed_lists};
+  List::Objects::WithUtils->import::into($caller, @lowu);
 
   List::Objects::Types->import::into($caller, '-all');
   Types::Standard->import::into($caller, '-types');
@@ -72,6 +77,9 @@ Defaults::Modern - Yet another approach to modernistic Perl
     confess "No items in array!" unless $immutable->has_any;
     $immutable
   }
+
+  # Autobox list-type refs via List::Objects::WithUtils ->
+  use Defaults::Modern 'autobox_lists';
 
   # See DESCRIPTION for complete details on imported functionality.
 
