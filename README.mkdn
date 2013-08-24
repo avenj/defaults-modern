@@ -6,13 +6,24 @@ Defaults::Modern - Yet another approach to modernistic Perl
 
     use Defaults::Modern;
 
-    # Small example ...
     # Function::Parameters + List::Objects::WithUtils + types ->
     fun to_immutable ( (ArrayRef | ArrayObj) $arr ) {
+      # blessed() and confess() are available (amongst others):
       my $immutable = immarray( blessed $arr ? $arr->all : @$arr );
       confess "No items in array!" unless $immutable->has_any;
       $immutable
     }
+
+    # define keyword for defining constants ->
+
+    define ARRAY_MAX = 10;
+
+    fun slice_to_max ( ArrayObj $arr ) {
+      $arr->sliced( 0 .. ARRAY_MAX )
+    }
+
+    # Optionally utobox list-type refs via List::Objects::WithUtils ->
+    use Defaults::Modern 'autobox_lists';
 
     # See DESCRIPTION for complete details on imported functionality.
 
@@ -24,7 +35,8 @@ Yet another approach to writing Perl in a modern style.
 
 When you `use Defaults::Modern`, you get:
 
-- [strict](http://search.cpan.org/perldoc?strict) and fatal [warnings](http://search.cpan.org/perldoc?warnings) except for `once`
+- [strict](http://search.cpan.org/perldoc?strict) and fatal [warnings](http://search.cpan.org/perldoc?warnings) except for `once`; additionally disallow
+[bareword::filehandles](http://search.cpan.org/perldoc?bareword::filehandles)
 - The `v5.14` feature set (state, say, unicode\_strings, array\_base) except for
 `switch`
 - __carp__, __croak__, and __confess__ from [Carp](http://search.cpan.org/perldoc?Carp)
@@ -36,7 +48,12 @@ When you `use Defaults::Modern`, you get:
 in combination with [Function::Parameters](http://search.cpan.org/perldoc?Function::Parameters)
 - __try__ and __catch__ from [Try::Tiny](http://search.cpan.org/perldoc?Try::Tiny)
 - __path__ from [Path::Tiny](http://search.cpan.org/perldoc?Path::Tiny)
-- [true](http://search.cpan.org/perldoc?true)
+- __maybe__ from [PerlX::Maybe](http://search.cpan.org/perldoc?PerlX::Maybe)
+- A __define__ keyword for defining constants
+- [true](http://search.cpan.org/perldoc?true) to avoid adding '1;' to all of your modules
+
+If you import `autobox_lists`, ARRAY and HASH type references are autoboxed
+via [List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils).
 
 Uses [Import::Into](http://search.cpan.org/perldoc?Import::Into) to provide __import__; see the [Import::Into](http://search.cpan.org/perldoc?Import::Into)
 documentation for details.
@@ -45,4 +62,10 @@ documentation for details.
 
 Jon Portnoy <avenj@cobaltirc.org>
 
-Inspired by [Defaults::Mauke](http://search.cpan.org/perldoc?Defaults::Mauke)
+Licensed under the same terms as Perl.
+
+Inspired by [Defaults::Mauke](http://search.cpan.org/perldoc?Defaults::Mauke) and [Moops](http://search.cpan.org/perldoc?Moops).
+
+The code backing the __define__ keyword is forked from TOBYINK's
+[PerlX::Define](http://search.cpan.org/perldoc?PerlX::Define) to avoid the [Moops](http://search.cpan.org/perldoc?Moops) dependency and is copyright Toby
+Inkster.
