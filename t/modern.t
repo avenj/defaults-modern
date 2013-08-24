@@ -2,6 +2,10 @@ use Test::More;
 
 use Defaults::Modern;
 
+define FOO = 'bar';
+
+ok FOO eq 'bar', 'define ok';
+
 # Imports
 #  Carp
 can_ok __PACKAGE__, qw/ carp croak confess /;

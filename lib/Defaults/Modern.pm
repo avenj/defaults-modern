@@ -18,20 +18,23 @@ use PerlX::Maybe         ();
 use List::Objects::Types ();
 use List::Objects::WithUtils ();
 
+use Defaults::Modern::Define ();
 
 use Import::Into;
 
 sub import {
   my (undef, @imports) = @_;
-  my $caller = caller;
+  my $pkg = caller;
 
   my %params = map {; $_ => 1 } @imports;
 
-  Carp->import::into($caller,
+  Defaults::Modern::Define->import::into($pkg);
+
+  Carp->import::into($pkg,
     qw/carp croak confess/,
   );
 
-  Scalar::Util->import::into($caller,
+  Scalar::Util->import::into($pkg,
     qw/blessed reftype weaken/,
   );
   
@@ -45,20 +48,20 @@ sub import {
 
   true->import;
 
-  Function::Parameters->import::into($caller);
-  Path::Tiny->import::into($caller, 'path');
-  Try::Tiny->import::into($caller);
+  Function::Parameters->import::into($pkg);
+  Path::Tiny->import::into($pkg, 'path');
+  Try::Tiny->import::into($pkg);
 
-  PerlX::Maybe->import::into($caller, qw/maybe provided/);
+  PerlX::Maybe->import::into($pkg, qw/maybe provided/);
 
   my @lowu = qw/array hash immarray/;
   push @lowu, 'autobox' 
     if defined $params{autobox_lists}
     or defined $params{autoboxed_lists};
-  List::Objects::WithUtils->import::into($caller, @lowu);
+  List::Objects::WithUtils->import::into($pkg, @lowu);
 
-  List::Objects::Types->import::into($caller, '-all');
-  Types::Standard->import::into($caller, '-types');
+  List::Objects::Types->import::into($pkg, '-all');
+  Types::Standard->import::into($pkg, '-types');
 
   1
 }
@@ -75,12 +78,18 @@ Defaults::Modern - Yet another approach to modernistic Perl
 
   use Defaults::Modern;
 
-  # Small example ...
+  # define keyword ->
+  define ARRAY_MAX = 10;
+
   # Function::Parameters + List::Objects::WithUtils + types ->
   fun to_immutable ( (ArrayRef | ArrayObj) $arr ) {
     my $immutable = immarray( blessed $arr ? $arr->all : @$arr );
     confess "No items in array!" unless $immutable->has_any;
     $immutable
+  }
+
+  fun slice_to_max ( ArrayObj $arr ) {
+    $arr->sliced( 0 .. ARRAY_MAX )
   }
 
   # Autobox list-type refs via List::Objects::WithUtils ->
@@ -144,7 +153,11 @@ B<maybe> from L<PerlX::Maybe>
 
 =item *
 
-L<true>
+A B<define> keyword for defining constants
+
+=item *
+
+L<true> to avoid adding '1;' to all of your modules
 
 =back
 
