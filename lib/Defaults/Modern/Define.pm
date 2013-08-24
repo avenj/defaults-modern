@@ -5,29 +5,27 @@ use strict; use warnings FATAL => 'all';
 #  (... to avoid the Moops dep)
 # This probably goes away if PerlX::Define gets pulled out later.
 
+use Carp ();
+
 use B ();
 use Keyword::Simple ();
+
 sub import {
   shift;
   if (@_) {
     my ($name, $val) = @_;
     my $pkg = caller;
-    local $@;
-    if (ref $val) {
-      eval
-        "package $pkg; sub $name () { \$val }; 1;"
-    } else {
-      eval
-        "package $pkg; sub $name () { ${\ B::perlstring($val) } }; 1;"
-    }
-    die $@ if $@;
+    my $code = ref $val ?
+        qq[package $pkg; sub $name () { \$val }; 1;]
+        : qq[package $pkg; sub $name () { ${\ B::perlstring($val) } }; 1;];
+    local $@; eval $code; die $@ if $@;
     return
   }
 
   Keyword::Simple::define('define' => sub {
     my ($line) = @_;
     my ($ws1, $name, $ws2, $equals) =
-      ( $$line =~ m{\A([\n\s]*)(\w+)([\n\s]*)(=\>?)}s )
+      ($$line =~ m{\A([\n\s]*)(\w+)([\n\s]*)(=\>?)}s)
         or Carp::croak("Syntax error near 'define'");
     my $len = length $ws1 . $name . $ws2 . $equals;
     substr($$line, 0, $len)
