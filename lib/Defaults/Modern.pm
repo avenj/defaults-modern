@@ -78,21 +78,21 @@ Defaults::Modern - Yet another approach to modernistic Perl
 
   use Defaults::Modern;
 
-  # define keyword ->
-  define ARRAY_MAX = 10;
-
   # Function::Parameters + List::Objects::WithUtils + types ->
   fun to_immutable ( (ArrayRef | ArrayObj) $arr ) {
+    # blessed() and confess() are available (amongst others):
     my $immutable = immarray( blessed $arr ? $arr->all : @$arr );
     confess "No items in array!" unless $immutable->has_any;
     $immutable
   }
 
+  # define keyword for defining constants ->
+  define ARRAY_MAX = 10;
   fun slice_to_max ( ArrayObj $arr ) {
     $arr->sliced( 0 .. ARRAY_MAX )
   }
 
-  # Autobox list-type refs via List::Objects::WithUtils ->
+  # Optionally utobox list-type refs via List::Objects::WithUtils ->
   use Defaults::Modern 'autobox_lists';
 
   # See DESCRIPTION for complete details on imported functionality.
@@ -171,7 +171,13 @@ documentation for details.
 
 Jon Portnoy <avenj@cobaltirc.org>
 
-Inspired by L<Defaults::Mauke>
+Licensed under the same terms as Perl.
+
+Inspired by L<Defaults::Mauke> and L<Moops>.
+
+The code backing the B<define> keyword is forked from TOBYINK's
+L<PerlX::Define> to avoid the L<Moops> dependency and is copyright Toby
+Inkster.
 
 =cut
 
