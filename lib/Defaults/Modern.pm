@@ -27,7 +27,7 @@ sub import {
   my (undef, @imports) = @_;
   my $pkg = caller;
 
-  my %params = map {; $_ => 1 } @imports;
+  my %params = map {; ($_ =~ s/^://r) => 1 } @imports;
 
   Defaults::Modern::Define->import::into($pkg);
 
@@ -154,7 +154,7 @@ B<path> from L<Path::Tiny>
 
 =item *
 
-B<maybe> from L<PerlX::Maybe>
+B<maybe> and B<provided> from L<PerlX::Maybe>
 
 =item *
 
