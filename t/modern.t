@@ -26,30 +26,32 @@ use lib 't/inc';
 use_ok 'PkgTrue';
 
 # no indirect
-package 
-  Bar { 
-    sub foo { 1 } 
+package T { 
+    sub f { 1 } 
 }
-ok not(eval 'foo Bar'), 'indirect eval failed ok';
+ok not(eval 'f T'), 'indirect eval failed ok';
 ok $@, 'indirect method call died ok';
-cmp_ok $@, '=~', qr/indirect/i, 'indirect method call threw exception ok';
+cmp_ok $@, '=~', qr/indirect/i, 'indirect method call threw exception ok'
+  or diag explain $@;
 
 # no bareword::filehandles
 ok not(eval 'open F, __FILE__'), 'bareword fh eval failed ok';
 ok $@, 'bareword fh died ok';
-cmp_ok $@, '=~', qr/bareword/i, 'bareword fh threw exception ok';
+cmp_ok $@, '=~', qr/bareword/i, 'bareword fh threw exception ok'
+  or diag explain $@;
 
 # strict
 ok not(eval "\$x"), 'strict eval failed ok';
 ok $@, 'strict eval died ok';
 cmp_ok $@, '=~', qr/^Global symbol "\$x" requires explicit package name/,
-  'strict eval threw exception ok';
+  'strict eval threw exception ok' or diag explain $@;
 
 # warnings
 ok not(eval "my \$foo = 'bar'; 1 if \$foo == 1"),
   'fatal numeric warning ok';
 ok $@, 'numeric warning died ok';
-cmp_ok $@, '=~', qr/numeric/, 'numeric warning threw exception ok';
+cmp_ok $@, '=~', qr/numeric/, 'numeric warning threw exception ok'
+  or diag explain $@;
 
 # 5.14 features
 eval 'state $foo';
@@ -64,6 +66,18 @@ ok calc( 1, 0.5 ) == 1.5, 'Function::Parameters imported ok';
 # List::Objects::Types
 fun frob (ArrayObj $arr) { $arr->count }
 ok frob( array(1,2,3) ) == 3, 'List::Objects::Types imported ok';
+
+# bad import tag
+package My::Bad {
+  use Test::More;
+  require Defaults::Modern;
+
+  ok not(eval "Defaults::Modern->import('foobar')"),
+    'eval with bad import tag failed';
+  ok $@, 'eval with bad import tag died';
+  cmp_ok $@, '=~', qr/export/, 'eval with bad import tag exception ok'
+    or diag explain $@;
+}
 
 # autobox_lists
 package My::Foo {
