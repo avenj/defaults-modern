@@ -37,4 +37,13 @@ ok calc( 1, 0.5 ) == 1.5, 'Function::Parameters imported ok';
 fun frob (ArrayObj $arr) { $arr->count }
 ok frob( array(1,2,3) ) == 3, 'List::Objects::Types imported ok';
 
+{ package
+  T::Foo;
+  use Test::More;
+  use Defaults::Modern 'autobox_lists';
+
+  ok []->count == array->count, 'ARRAY autoboxed ok';
+  ok +{}->keys->count == hash->keys->count, 'HASH autoboxed ok';
+}
+
 done_testing;
