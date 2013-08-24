@@ -36,6 +36,12 @@ ok $@, 'strict eval died ok';
 cmp_ok $@, '=~', qr/^Global symbol "\$x" requires explicit package name/,
   'strict eval threw exception ok';
 
+# warnings
+ok not(eval "my \$foo = 'bar'; 1 if \$foo == 1"),
+  'fatal numeric warning ok';
+ok $@, 'numeric warning died ok';
+cmp_ok $@, '=~', qr/numeric/, 'numeric warning threw exception ok';
+
 # 5.14 features
 eval 'state $foo';
 ok !$@, 'state imported ok';
