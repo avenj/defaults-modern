@@ -87,7 +87,9 @@ Defaults::Modern - Yet another approach to modernistic Perl
   }
 
   # define keyword for defining constants ->
+
   define ARRAY_MAX = 10;
+
   fun slice_to_max ( ArrayObj $arr ) {
     $arr->sliced( 0 .. ARRAY_MAX )
   }

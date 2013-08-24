@@ -9,7 +9,6 @@ use B ();
 use Keyword::Simple ();
 sub import {
   shift;
-
   if (@_) {
     my ($name, $val) = @_;
     my $pkg = caller;
@@ -26,7 +25,7 @@ sub import {
   }
 
   Keyword::Simple::define('define' => sub {
-    my $line = shift;
+    my ($line) = @_;
     my ($ws1, $name, $ws2, $equals) =
       ( $$line =~ m{\A([\n\s]*)(\w+)([\n\s]*)(=\>?)}s )
         or Carp::croak("Syntax error near 'define'");
