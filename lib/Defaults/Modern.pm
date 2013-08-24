@@ -119,7 +119,7 @@ L<bareword::filehandles> and L<indirect> method calls
 
 =item *
 
-The C<v5.14> feature set (state, say, unicode_strings, array_base) -- except for
+The C<v5.14> feature set (C<state>, C<say>, C<unicode_strings>, C<array_base>) -- except for
 C<switch>, which is deprecated in newer perls
 
 =item *
