@@ -1,33 +1,32 @@
 package Defaults::Modern;
 use v5.14;
+
 use strict; use warnings FATAL => 'all';
+
 no bareword::filehandles;
 no indirect ':fatal';
 
-use Carp;
-use Scalar::Util ();
+use Carp    ();
 use feature ();
 use true    ();
 
-use Function::Parameters ();
-use Path::Tiny           ();
-use Try::Tiny            ();
-use Types::Standard      ();
-
-use PerlX::Maybe         ();
-
-use List::Objects::Types ();
-use List::Objects::WithUtils ();
-
-use Defaults::Modern::Define ();
+use Defaults::Modern::Define  ();
+use Function::Parameters      ();
+use List::Objects::Types      ();
+use List::Objects::WithUtils  ();
+use Path::Tiny                ();
+use PerlX::Maybe              ();
+use Try::Tiny                 ();
+use Types::Standard           ();
+use Scalar::Util              ();
 
 use Import::Into;
 
 sub import {
-  my (undef, @imports) = @_;
-  my $pkg = caller;
-
+  my ($class, @imports) = @_;
   my %params = map {; ($_ =~ s/^://r) => 1 } @imports;
+
+  my $pkg = caller;
 
   Defaults::Modern::Define->import::into($pkg);
 
@@ -66,7 +65,7 @@ sub import {
   List::Objects::Types->import::into($pkg, '-all');
   Types::Standard->import::into($pkg, '-types');
 
-  1
+  $class
 }
 
 1;
