@@ -10,6 +10,8 @@ use Carp    ();
 use feature ();
 use true    ();
 
+use match::simple ();
+
 use Defaults::Modern::Define  ();
 use Function::Parameters      ();
 use List::Objects::Types      ();
@@ -69,6 +71,7 @@ sub import {
   feature->import(':5.14');
   feature->unimport('switch');
 
+  match::simple->import::into($pkg);
   true->import;
 
   # External functionality
@@ -163,6 +166,10 @@ L<bareword::filehandles> and L<indirect> method calls
 
 The C<v5.14> feature set (C<state>, C<say>, C<unicode_strings>, C<array_base>) -- except for
 C<switch>, which is deprecated in newer perls
+
+=item *
+
+The C<|M|> match operator from L<match::simple>
 
 =item *
 

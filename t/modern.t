@@ -24,6 +24,10 @@ can_ok __PACKAGE__, qw/ blessed reftype weaken /;
 #  Try::Catch
 can_ok __PACKAGE__, qw/ try catch /;
 
+# match::simple
+my @foo = qw/foo bar baz/;
+ok 'foo' |M| \@foo, 'match::simple imported ok';
+
 # true
 use lib 't/inc';
 use_ok 'PkgTrue';
