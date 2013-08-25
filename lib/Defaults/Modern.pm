@@ -169,10 +169,6 @@ C<switch>, which is deprecated in newer perls
 
 =item *
 
-The C<|M|> match operator from L<match::simple>
-
-=item *
-
 B<carp>, B<croak>, and B<confess> error reporting tools from L<Carp>
 
 =item *
@@ -213,7 +209,11 @@ A B<define> keyword for defining constants based on L<PerlX::Define>
 
 =item *
 
-L<true> so you can skip adding '1;' to all of your modules
+The C<|M|> match operator from L<match::simple>
+
+=item *
+
+L<true>.pm so you can skip adding '1;' to all of your modules
 
 =back
 
