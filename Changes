@@ -1,5 +1,13 @@
 Revision history for Perl module Defaults::Modern
 
+0.002002 2013-08-24
+
+  - Import is_$type / to_$type / assert_$type functions
+
+  - croak on unknown import tags
+
+  - Add 'all' import tag
+
 0.002001 2013-08-24
 
   - Add 'no indirect'

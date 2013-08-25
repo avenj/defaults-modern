@@ -14,17 +14,33 @@ Defaults::Modern - Yet another approach to modernistic Perl
       $immutable
     }
 
-    # define keyword for defining constants ->
+    package My::Foo {
+      use Defaults::Modern;
 
+    # define keyword for defining constants ->
     define ARRAY_MAX = 10;
 
-    fun slice_to_max ( ArrayObj $arr ) {
-      $arr->sliced( 0 .. ARRAY_MAX )
+    # Moo(se) with types ->
+    use Moo;
+
+    has myarray => (
+      isa => ArrayObj,
+      is  => 'ro',
+      writer  => '_set_myarray',
+      default => sub { array },
+    );
+
+      # Method with optional positional param and implicit $self ->
+      method slice_to_max (Int $max = -1) {
+        my $arr = $self->myarray;
+        $self->_set_myarray( 
+          $arr->sliced( 0 .. $max >= 0 ? $max : ARRAY_MAX )
+        )
+      }
     }
 
     # Optionally autobox list-type refs via List::Objects::WithUtils ->
     use Defaults::Modern 'autobox_lists';
-
     my $obj = +{ foo => 'bar', baz => 'quux' }->inflate;
     my $baz = $obj->baz;
 
