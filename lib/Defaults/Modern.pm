@@ -113,12 +113,15 @@ Defaults::Modern - Yet another approach to modernistic Perl
 
     # Moo(se) with types ->
     use Moo;
+    use MooX::late;
 
     has myarray => (
       isa => ArrayObj,
       is  => 'ro',
       writer  => '_set_myarray',
-      default => sub { array },
+      # MooX::late allows us to coerce from an ArrayRef:
+      coerce  => 1,
+      default => sub { [] },
     );
 
     # Method with optional positional param and implicit $self ->
