@@ -68,7 +68,9 @@ sub import {
   true->import;
 
   Function::Parameters->import::into($pkg);
+
   Path::Tiny->import::into($pkg, 'path');
+
   Try::Tiny->import::into($pkg);
 
   PerlX::Maybe->import::into($pkg, qw/maybe provided/);
@@ -119,7 +121,7 @@ Defaults::Modern - Yet another approach to modernistic Perl
       default => sub { array },
     );
 
-    # Method with positional param and implicit $self ->
+    # Method with optional positional param and implicit $self ->
     method slice_to_max (Int $max = -1) {
       my $arr = $self->myarray;
       $self->_set_myarray( 
@@ -130,7 +132,6 @@ Defaults::Modern - Yet another approach to modernistic Perl
 
   # Optionally autobox list-type refs via List::Objects::WithUtils ->
   use Defaults::Modern 'autobox_lists';
-
   my $obj = +{ foo => 'bar', baz => 'quux' }->inflate;
   my $baz = $obj->baz;
 
