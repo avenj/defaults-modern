@@ -22,12 +22,15 @@ Defaults::Modern - Yet another approach to modernistic Perl
 
     # Moo(se) with types ->
     use Moo;
+    use MooX::late;
 
     has myarray => (
       isa => ArrayObj,
       is  => 'ro',
       writer  => '_set_myarray',
-      default => sub { array },
+      # MooX::late allows us to coerce from an ArrayRef:
+      coerce  => 1,
+      default => sub { [] },
     );
 
       # Method with optional positional param and implicit $self ->
@@ -67,10 +70,12 @@ When you `use Defaults::Modern`, you get:
 in combination with [Function::Parameters](http://search.cpan.org/perldoc?Function::Parameters) (see the ["SYNOPSIS"](#SYNOPSIS) and
 [Function::Parameters](http://search.cpan.org/perldoc?Function::Parameters) POD)
 - __try__ and __catch__ from [Try::Tiny](http://search.cpan.org/perldoc?Try::Tiny)
-- The __path__ object constructor from [Path::Tiny](http://search.cpan.org/perldoc?Path::Tiny)
+- The __path__ object constructor from [Path::Tiny](http://search.cpan.org/perldoc?Path::Tiny) and related types/coercions
+from [Types::Path::Tiny](http://search.cpan.org/perldoc?Types::Path::Tiny)
 - __maybe__ and __provided__ definedness-checking syntax sugar from [PerlX::Maybe](http://search.cpan.org/perldoc?PerlX::Maybe)
 - A __define__ keyword for defining constants based on [PerlX::Define](http://search.cpan.org/perldoc?PerlX::Define)
-- [true](http://search.cpan.org/perldoc?true) so you can skip adding '1;' to all of your modules
+- The `|M|` match operator from [match::simple](http://search.cpan.org/perldoc?match::simple)
+- [true](http://search.cpan.org/perldoc?true).pm so you can skip adding '1;' to all of your modules
 
 If you import `autobox_lists`, ARRAY and HASH type references are autoboxed
 via [List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils).

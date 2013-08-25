@@ -1,5 +1,11 @@
 Revision history for Perl module Defaults::Modern
 
+0.003001 2013-08-25
+
+  - Add Types::Path::Tiny
+
+  - Add |M| from match::simple
+
 0.002002 2013-08-24
 
   - Import is_$type / to_$type / assert_$type functions
