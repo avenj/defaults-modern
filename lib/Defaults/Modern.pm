@@ -18,6 +18,7 @@ use Path::Tiny                ();
 use PerlX::Maybe              ();
 use Try::Tiny                 ();
 use Types::Standard           ();
+use Types::Path::Tiny         ();
 use Scalar::Util              ();
 
 use Import::Into;
@@ -79,8 +80,9 @@ sub import {
   push @lowu, 'autobox' if defined $params{autobox_lists};
   List::Objects::WithUtils->import::into($pkg, @lowu);
 
-  List::Objects::Types->import::into($pkg, '-all');
   Types::Standard->import::into($pkg, '-all');
+  List::Objects::Types->import::into($pkg, '-all');
+  Types::Path::Tiny->import::into($pkg, '-all');
 
   $class
 }
@@ -189,7 +191,8 @@ B<try> and B<catch> from L<Try::Tiny>
 
 =item *
 
-The B<path> object constructor from L<Path::Tiny>
+The B<path> object constructor from L<Path::Tiny> and related types/coercions
+from L<Types::Path::Tiny>
 
 =item *
 

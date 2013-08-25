@@ -13,6 +13,7 @@ can_ok __PACKAGE__, qw/ array immarray hash /;
 
 #  Path::Tiny
 can_ok __PACKAGE__, qw/ path /;
+ok is_Path(path('/')), 'Path::Tiny and Types for same ok';
 
 #  PerlX::Maybe
 can_ok __PACKAGE__, qw/ maybe provided /;
