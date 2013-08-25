@@ -46,8 +46,10 @@ sub import {
 
   my $pkg = caller;
 
+  # Us
   Defaults::Modern::Define->import::into($pkg);
 
+  # Core
   Carp->import::into($pkg,
     qw/carp croak confess/,
   );
@@ -56,6 +58,7 @@ sub import {
     qw/blessed reftype weaken/,
   );
   
+  # Pragmas
   strict->import;
   warnings->import(FATAL => 'all');
   warnings->unimport('once');
@@ -68,18 +71,17 @@ sub import {
 
   true->import;
 
+  # External functionality
   Function::Parameters->import::into($pkg);
-
   Path::Tiny->import::into($pkg, 'path');
-
-  Try::Tiny->import::into($pkg);
-
   PerlX::Maybe->import::into($pkg, qw/maybe provided/);
+  Try::Tiny->import::into($pkg);
 
   my @lowu = qw/array hash immarray/;
   push @lowu, 'autobox' if defined $params{autobox_lists};
   List::Objects::WithUtils->import::into($pkg, @lowu);
 
+  # Types
   Types::Standard->import::into($pkg, '-all');
   List::Objects::Types->import::into($pkg, '-all');
   Types::Path::Tiny->import::into($pkg, '-all');
