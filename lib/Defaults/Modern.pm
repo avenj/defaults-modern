@@ -14,14 +14,19 @@ use match::simple ();
 
 use Defaults::Modern::Define  ();
 use Function::Parameters      ();
-use List::Objects::Types      ();
 use List::Objects::WithUtils  ();
 use Path::Tiny                ();
 use PerlX::Maybe              ();
 use Try::Tiny                 ();
+use Scalar::Util              ();
+
+
 use Types::Standard           ();
 use Types::Path::Tiny         ();
-use Scalar::Util              ();
+use Type::Registry            ();
+use Type::Utils               ();
+use List::Objects::Types      ();
+
 
 use Import::Into;
 
@@ -75,7 +80,36 @@ sub import {
   true->import;
 
   # External functionality
-  Function::Parameters->import::into($pkg);
+
+  state $reify = sub {
+    state $guard = do { require Type::Utils };
+    Type::Utils::dwim_type($_[0], for => $_[1])
+  };
+
+  state $fp_defaults = +{
+    default_arguments     => 1,
+    check_argument_count  => 1,
+    named_parameters      => 1,
+    types                 => 1,
+    reify_type            => $reify,
+  };
+
+  Function::Parameters->import::into( $pkg,
+    +{
+      fun => {
+        name                  => 'optional',
+        %$fp_defaults
+      },
+      method => {
+        name                  => 'required',
+        attrs                 => ':method',
+        shift                 => '$self',
+        invocant              => 1,
+        %$fp_defaults
+      }
+    }
+  );
+
   Path::Tiny->import::into($pkg, 'path');
   PerlX::Maybe->import::into($pkg, qw/maybe provided/);
   Try::Tiny->import::into($pkg);
@@ -88,6 +122,13 @@ sub import {
   Types::Standard->import::into($pkg, '-all');
   List::Objects::Types->import::into($pkg, '-all');
   Types::Path::Tiny->import::into($pkg, '-all');
+
+  Type::Registry->for_class($pkg)->add_types($_) for qw/
+    Types::Standard
+    Types::Path::Tiny
+    List::Objects::Types
+  /;
+
 
   $class
 }
