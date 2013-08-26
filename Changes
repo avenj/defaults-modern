@@ -1,5 +1,11 @@
 Revision history for Perl module Defaults::Modern
 
+0.003002 2013-08-26
+
+  - Fix type registration
+
+  - Fix Function::Parameters import to set Moops-like defaults
+
 0.003001 2013-08-25
 
   - Add Types::Path::Tiny
