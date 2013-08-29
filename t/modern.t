@@ -99,7 +99,7 @@ package My::Foo {
 # Moo
 package My::OO {
   use Test::More;
-  use Defaults::Modern 'moo';
+  use Defaults::Modern 'Moo';
 
   has foo => (
     is      => 'ro',
