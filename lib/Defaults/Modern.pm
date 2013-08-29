@@ -37,6 +37,7 @@ sub import {
     map {; $_ => 1 } qw/
       all
       autobox_lists 
+      moo
     /
   };
 
@@ -129,6 +130,12 @@ sub import {
     List::Objects::Types
   /;
 
+  if (defined $params{moo}) {
+    require Moo;
+    Moo->import::into($pkg);
+    require MooX::late;
+    MooX::late->import::into($pkg);
+  }
 
   $class
 }

@@ -96,6 +96,21 @@ package My::Foo {
   ok +{foo => 1}->inflate->foo == 1, 'autoboxed ->inflate ok';
 }
 
+# Moo
+package My::OO {
+  use Test::More;
+  use Defaults::Modern 'moo';
+
+  has foo => (
+    is      => 'ro',
+    isa     => ImmutableArray,
+    coerce  => 1,
+    default => sub { [] },
+  );
+}
+
+ok is_ArrayObj( My::OO->new->foo ), 'Moo imported ok';
+
 # 'all' import tag
 package My::Bar {
   use Test::More;
