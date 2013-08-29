@@ -265,8 +265,42 @@ L<true>.pm so you can skip adding '1;' to all of your modules
 
 =back
 
-If you import C<autobox_lists>, ARRAY and HASH type references are autoboxed
-via L<List::Objects::WithUtils>.
+If you import the tag C<autobox_lists>, ARRAY and HASH type references are autoboxed
+via L<List::Objects::WithUtils>:
+
+  use Defaults::Modern 'autobox_lists';
+  my $itr = [ 1 .. 10 ]->natatime(2);
+
+L<Moo> and L<MooX::late> are depended upon in order to guarantee their
+availability, but not automatically imported:
+
+  use Moo;
+  use MooX::late;
+  use Defaults::Modern;
+
+  has foo => (
+    is  => 'ro',
+    isa => ArrayObj,
+    coerce  => 1,
+    default => sub { [] },
+  );
+
+=begin comment
+
+ ## Undocumented for now, because Moops is a better solution.
+
+If you import C<Moo>, you get L<Moo> and L<MooX::late> (but you should really
+be using L<Moops> instead):
+
+  use Defaults::Modern 'Moo';
+  has foo => (
+    is      => 'ro',
+    isa     => ArrayObj,
+    coerce  => 1,
+    default => sub { [] },
+  );
+
+=end comment
 
 Uses L<Import::Into> to provide B<import>; see the L<Import::Into>
 documentation for details.
