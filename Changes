@@ -1,5 +1,9 @@
 Revision history for Perl module Defaults::Modern
 
+0.004001 2013-09-01
+
+  - Add Switch::Plain
+
 0.003002 2013-08-26
 
   - Fix type registration

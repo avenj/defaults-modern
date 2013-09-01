@@ -10,7 +10,7 @@ Defaults::Modern - Yet another approach to modernistic Perl
     fun to_immutable ( (ArrayRef | ArrayObj) $arr ) {
       # blessed() and confess() are available (amongst others):
       my $immutable = immarray( blessed $arr ? $arr->all : @$arr );
-      confess "No items in array!" unless $immutable->has_any;
+      confess 'No items in array!' unless $immutable->has_any;
       $immutable
     }
 
@@ -75,13 +75,45 @@ from [Types::Path::Tiny](http://search.cpan.org/perldoc?Types::Path::Tiny)
 - __maybe__ and __provided__ definedness-checking syntax sugar from [PerlX::Maybe](http://search.cpan.org/perldoc?PerlX::Maybe)
 - A __define__ keyword for defining constants based on [PerlX::Define](http://search.cpan.org/perldoc?PerlX::Define)
 - The `|M|` match operator from [match::simple](http://search.cpan.org/perldoc?match::simple)
+- The `sswitch` and `nswitch` switch/case constructs from [Switch::Plain](http://search.cpan.org/perldoc?Switch::Plain)
 - [true](http://search.cpan.org/perldoc?true).pm so you can skip adding '1;' to all of your modules
 
-If you import `autobox_lists`, ARRAY and HASH type references are autoboxed
-via [List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils).
+If you import the tag `autobox_lists`, ARRAY and HASH type references are autoboxed
+via [List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils):
 
-Uses [Import::Into](http://search.cpan.org/perldoc?Import::Into) to provide __import__; see the [Import::Into](http://search.cpan.org/perldoc?Import::Into)
-documentation for details.
+    use Defaults::Modern 'autobox_lists';
+    my $itr = [ 1 .. 10 ]->natatime(2);
+
+[Moo](http://search.cpan.org/perldoc?Moo) and [MooX::late](http://search.cpan.org/perldoc?MooX::late) are depended upon in order to guarantee their
+availability, but not automatically imported:
+
+    use Moo;
+    use MooX::late;
+    use Defaults::Modern;
+
+    has foo => (
+      is  => 'ro',
+      isa => ArrayObj,
+      coerce  => 1,
+      default => sub { [] },
+    );
+
+(If you're building classes, you may want to look into [namespace::clean](http://search.cpan.org/perldoc?namespace::clean) /
+[namespace::sweep](http://search.cpan.org/perldoc?namespace::sweep) or similar -- [Defaults::Modern](http://search.cpan.org/perldoc?Defaults::Modern) imports an awful lot of
+Stuff. [Moops](http://search.cpan.org/perldoc?Moops) may be nicer to work with.)
+
+    ## Undocumented for now, because Moops is a better solution.
+
+If you import `Moo`, you get [Moo](http://search.cpan.org/perldoc?Moo) and [MooX::late](http://search.cpan.org/perldoc?MooX::late) (but you should really
+be using [Moops](http://search.cpan.org/perldoc?Moops) instead):
+
+    use Defaults::Modern 'Moo';
+    has foo => (
+      is      => 'ro',
+      isa     => ArrayObj,
+      coerce  => 1,
+      default => sub { [] },
+    );
 
 # SEE ALSO
 
@@ -92,15 +124,17 @@ most visible portions of which come from the following modules:
 
 [Function::Parameters](http://search.cpan.org/perldoc?Function::Parameters)
 
-[List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils)
+[List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils) and [List::Objects::Types](http://search.cpan.org/perldoc?List::Objects::Types)
 
-[List::Objects::Types](http://search.cpan.org/perldoc?List::Objects::Types)
+[match::simple](http://search.cpan.org/perldoc?match::simple)
 
 [Path::Tiny](http://search.cpan.org/perldoc?Path::Tiny)
 
 [PerlX::Maybe](http://search.cpan.org/perldoc?PerlX::Maybe)
 
 [Scalar::Util](http://search.cpan.org/perldoc?Scalar::Util)
+
+[Switch::Plain](http://search.cpan.org/perldoc?Switch::Plain)
 
 [Try::Tiny](http://search.cpan.org/perldoc?Try::Tiny)
 
