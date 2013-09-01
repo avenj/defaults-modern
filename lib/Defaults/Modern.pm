@@ -290,7 +290,7 @@ availability, but not automatically imported:
     default => sub { [] },
   );
 
-(If you're building classes, you may want to look into L<namesweep::clean> /
+(If you're building classes, you may want to look into L<namespace::clean> /
 L<namespace::sweep> or similar -- L<Defaults::Modern> imports an awful lot of
 Stuff. L<Moops> may be nicer to work with.)
 
