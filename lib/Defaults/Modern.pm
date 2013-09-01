@@ -307,9 +307,6 @@ be using L<Moops> instead):
 
 =end comment
 
-Uses L<Import::Into> to provide B<import>; see the L<Import::Into>
-documentation for details.
-
 =head1 SEE ALSO
 
 This package just glues together useful parts of CPAN, the
