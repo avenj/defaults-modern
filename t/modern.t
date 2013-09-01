@@ -70,6 +70,11 @@ ok $@, 'switch not imported ok';
 fun calc (Int $x, Num $y) { $x + $y }
 ok calc( 1, 0.5 ) == 1.5, 'Function::Parameters imported ok';
 
+# Switch::Plain;
+sswitch ('foo') {
+  case 'foo': { ok 1, 'Switch::Plain imported ok' }
+}
+
 # List::Objects::Types
 fun frob (ArrayObj $arr) { $arr->count }
 ok frob( array(1,2,3) ) == 3, 'List::Objects::Types imported ok';

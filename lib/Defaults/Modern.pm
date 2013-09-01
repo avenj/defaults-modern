@@ -19,7 +19,7 @@ use Path::Tiny                ();
 use PerlX::Maybe              ();
 use Try::Tiny                 ();
 use Scalar::Util              ();
-
+use Switch::Plain             ();
 
 use Types::Standard           ();
 use Types::Path::Tiny         ();
@@ -114,6 +114,7 @@ sub import {
   Path::Tiny->import::into($pkg, 'path');
   PerlX::Maybe->import::into($pkg, qw/maybe provided/);
   Try::Tiny->import::into($pkg);
+  Switch::Plain->import;
 
   my @lowu = qw/array hash immarray/;
   push @lowu, 'autobox' if defined $params{autobox_lists};
@@ -258,6 +259,10 @@ A B<define> keyword for defining constants based on L<PerlX::Define>
 =item *
 
 The C<|M|> match operator from L<match::simple>
+
+=item *
+
+The C<sswitch> and C<nswitch> switch/case constructs from L<Switch::Plain>
 
 =item *
 
