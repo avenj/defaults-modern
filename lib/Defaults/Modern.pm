@@ -157,7 +157,7 @@ Defaults::Modern - Yet another approach to modernistic Perl
   fun to_immutable ( (ArrayRef | ArrayObj) $arr ) {
     # blessed() and confess() are available (amongst others):
     my $immutable = immarray( blessed $arr ? $arr->all : @$arr );
-    confess "No items in array!" unless $immutable->has_any;
+    confess 'No items in array!' unless $immutable->has_any;
     $immutable
   }
 
