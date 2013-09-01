@@ -290,6 +290,10 @@ availability, but not automatically imported:
     default => sub { [] },
   );
 
+(If you're building classes, you may want to look into L<namesweep::clean> /
+L<namespace::sweep> or similar -- L<Defaults::Modern> imports an awful lot of
+Stuff. L<Moops> may be nicer to work with.)
+
 =begin comment
 
  ## Undocumented for now, because Moops is a better solution.
@@ -316,15 +320,17 @@ L<Carp>
 
 L<Function::Parameters>
 
-L<List::Objects::WithUtils>
+L<List::Objects::WithUtils> and L<List::Objects::Types>
 
-L<List::Objects::Types>
+L<match::simple>
 
 L<Path::Tiny>
 
 L<PerlX::Maybe>
 
 L<Scalar::Util>
+
+L<Switch::Plain>
 
 L<Try::Tiny>
 
