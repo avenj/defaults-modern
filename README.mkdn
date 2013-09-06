@@ -63,7 +63,7 @@ When you `use Defaults::Modern`, you get:
 `switch`, which is deprecated in newer perls
 - __carp__, __croak__, and __confess__ error reporting tools from [Carp](http://search.cpan.org/perldoc?Carp)
 - __blessed__, __reftype__, and __weaken__ utilities from [Scalar::Util](http://search.cpan.org/perldoc?Scalar::Util)
-- __array__, __immarray__, and __hash__ object constructors from
+- __array__, __array\_of__, __immarray__, and __hash__ object constructors from
 [List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils)
 - __fun__ and __method__ keywords from [Function::Parameters](http://search.cpan.org/perldoc?Function::Parameters)
 - The full [Types::Standard](http://search.cpan.org/perldoc?Types::Standard) set and [List::Objects::Types](http://search.cpan.org/perldoc?List::Objects::Types), which are useful

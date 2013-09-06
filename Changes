@@ -1,5 +1,11 @@
 Revision history for Perl module Defaults::Modern
 
+0.005001 2013-09-06
+
+  - Add hash_of() from latest List::Objects::WithUtils
+
+  - Catch type library import exceptions
+
 0.004001 2013-09-01
 
   - Add Switch::Plain
