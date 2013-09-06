@@ -6,6 +6,8 @@ use strict; use warnings FATAL => 'all';
 no bareword::filehandles;
 no indirect ':fatal';
 
+use Try::Tiny;
+
 use Carp    ();
 use feature ();
 use true    ();
@@ -17,7 +19,6 @@ use Function::Parameters      ();
 use List::Objects::WithUtils  ();
 use Path::Tiny                ();
 use PerlX::Maybe              ();
-use Try::Tiny                 ();
 use Scalar::Util              ();
 use Switch::Plain             ();
 
@@ -116,7 +117,7 @@ sub import {
   Try::Tiny->import::into($pkg);
   Switch::Plain->import;
 
-  my @lowu = qw/array hash immarray/;
+  my @lowu = qw/array array_of hash hash_of immarray/;
   push @lowu, 'autobox' if defined $params{autobox_lists};
   List::Objects::WithUtils->import::into($pkg, @lowu);
 
@@ -125,11 +126,18 @@ sub import {
   List::Objects::Types->import::into($pkg, '-all');
   Types::Path::Tiny->import::into($pkg, '-all');
 
-  Type::Registry->for_class($pkg)->add_types($_) for qw/
+  my @typelibs = qw/
     Types::Standard
     Types::Path::Tiny
-    List::Objects::Types
+     List::Objects::Types
   /;
+  for my $typelib (@typelibs) {
+    try {
+      Type::Registry->for_class($pkg)->add_types($typelib);
+    } catch {
+      Carp::carp($_)
+    };
+  }
 
   if (defined $params{moo}) {
     require Moo;
@@ -226,7 +234,7 @@ B<blessed>, B<reftype>, and B<weaken> utilities from L<Scalar::Util>
 
 =item *
 
-B<array>, B<immarray>, and B<hash> object constructors from
+B<array>, B<array_of>, B<immarray>, and B<hash> object constructors from
 L<List::Objects::WithUtils>
 
 =item *
