@@ -89,8 +89,8 @@ sub import {
   };
 
   state $fp_defaults = +{
+    strict                => 1,
     default_arguments     => 1,
-    check_argument_count  => 1,
     named_parameters      => 1,
     types                 => 1,
     reify_type            => $reify,
@@ -104,7 +104,7 @@ sub import {
       },
       method => {
         name                  => 'required',
-        attrs                 => ':method',
+        attributes            => ':method',
         shift                 => '$self',
         invocant              => 1,
         %$fp_defaults
