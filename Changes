@@ -1,5 +1,10 @@
 Revision history for Perl module Defaults::Modern
 
+0.005002 2013-09-15
+
+  - Compat fix wrt. Function::Parameters-1.0301
+    (old 'check_argument_count' is now 'strict')
+
 0.005001 2013-09-06
 
   - Add hash_of() from latest List::Objects::WithUtils
