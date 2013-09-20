@@ -234,8 +234,8 @@ B<blessed>, B<reftype>, and B<weaken> utilities from L<Scalar::Util>
 
 =item *
 
-B<array>, B<array_of>, B<immarray>, and B<hash> object constructors from
-L<List::Objects::WithUtils>
+B<array>, B<array_of>, B<immarray>, B<hash>, and B<hash_of> object
+constructors from L<List::Objects::WithUtils>
 
 =item *
 
