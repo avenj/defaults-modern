@@ -117,9 +117,9 @@ sub import {
   Try::Tiny->import::into($pkg);
   Switch::Plain->import;
 
-  my @lowu = qw/array array_of hash hash_of immarray/;
-  push @lowu, 'autobox' if defined $params{autobox_lists};
-  List::Objects::WithUtils->import::into($pkg, @lowu);
+  $params{autobox_lists} ?
+    List::Objects::WithUtils->import::into($pkg, 'all')
+    : List::Objects::WithUtils->import::into($pkg);
 
   # Types
   Types::Standard->import::into($pkg, '-all');
@@ -129,7 +129,7 @@ sub import {
   my @typelibs = qw/
     Types::Standard
     Types::Path::Tiny
-     List::Objects::Types
+    List::Objects::Types
   /;
   for my $typelib (@typelibs) {
     try {
@@ -234,8 +234,9 @@ B<blessed>, B<reftype>, and B<weaken> utilities from L<Scalar::Util>
 
 =item *
 
-B<array>, B<array_of>, B<immarray>, B<hash>, and B<hash_of> object
-constructors from L<List::Objects::WithUtils>
+All of the L<List::Objects::WithUtils object constructors (B<array>,
+B<array_of>, B<immarray>, B<immarray_of>, B<hash>, B<hash_of>, B<immhash>,
+B<immhash_of>)
 
 =item *
 
