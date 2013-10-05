@@ -122,20 +122,16 @@ sub import {
     : List::Objects::WithUtils->import::into($pkg);
 
   # Types
-  Types::Standard->import::into($pkg, '-all');
-  List::Objects::Types->import::into($pkg, '-all');
-  Types::Path::Tiny->import::into($pkg, '-all');
-
   state $typelibs = [ qw/
     Types::Standard
 
-    Types::LoadableClass
     Types::Path::Tiny
 
     List::Objects::Types
   / ];
 
   for my $typelib (@$typelibs) {
+    $typelib->import::into($pkg, -all);
     try {
       Type::Registry->for_class($pkg)->add_types($typelib);
     } catch {
@@ -248,9 +244,9 @@ B<fun> and B<method> keywords from L<Function::Parameters>
 
 =item *
 
-The full L<Types::Standard> set, L<Types::LoadableClass>, and
-L<List::Objects::Types> -- useful in combination with
-L<Function::Parameters> (see the L</SYNOPSIS> and L<Function::Parameters> POD)
+The full L<Types::Standard> set and L<List::Objects::Types> -- useful in
+combination with L<Function::Parameters> (see the L</SYNOPSIS> and
+L<Function::Parameters> POD)
 
 =item *
 
