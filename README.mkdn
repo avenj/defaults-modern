@@ -63,19 +63,20 @@ When you `use Defaults::Modern`, you get:
 `switch`, which is deprecated in newer perls
 - __carp__, __croak__, and __confess__ error reporting tools from [Carp](http://search.cpan.org/perldoc?Carp)
 - __blessed__, __reftype__, and __weaken__ utilities from [Scalar::Util](http://search.cpan.org/perldoc?Scalar::Util)
-- __array__, __array\_of__, __immarray__, and __hash__ object constructors from
-[List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils)
+- All of the [List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils) object constructors (__array__,
+__array\_of__, __immarray__, __immarray\_of__, __hash__, __hash\_of__, __immhash__,
+__immhash\_of__)
 - __fun__ and __method__ keywords from [Function::Parameters](http://search.cpan.org/perldoc?Function::Parameters)
-- The full [Types::Standard](http://search.cpan.org/perldoc?Types::Standard) set and [List::Objects::Types](http://search.cpan.org/perldoc?List::Objects::Types), which are useful
-in combination with [Function::Parameters](http://search.cpan.org/perldoc?Function::Parameters) (see the ["SYNOPSIS"](#SYNOPSIS) and
+- The full [Types::Standard](http://search.cpan.org/perldoc?Types::Standard) set and [List::Objects::Types](http://search.cpan.org/perldoc?List::Objects::Types) -- useful in
+combination with [Function::Parameters](http://search.cpan.org/perldoc?Function::Parameters) (see the ["SYNOPSIS"](#SYNOPSIS) and
 [Function::Parameters](http://search.cpan.org/perldoc?Function::Parameters) POD)
 - __try__ and __catch__ from [Try::Tiny](http://search.cpan.org/perldoc?Try::Tiny)
 - The __path__ object constructor from [Path::Tiny](http://search.cpan.org/perldoc?Path::Tiny) and related types/coercions
 from [Types::Path::Tiny](http://search.cpan.org/perldoc?Types::Path::Tiny)
 - __maybe__ and __provided__ definedness-checking syntax sugar from [PerlX::Maybe](http://search.cpan.org/perldoc?PerlX::Maybe)
 - A __define__ keyword for defining constants based on [PerlX::Define](http://search.cpan.org/perldoc?PerlX::Define)
-- The `|M|` match operator from [match::simple](http://search.cpan.org/perldoc?match::simple)
-- The `sswitch` and `nswitch` switch/case constructs from [Switch::Plain](http://search.cpan.org/perldoc?Switch::Plain)
+- The __|M|__ match operator from [match::simple](http://search.cpan.org/perldoc?match::simple)
+- The __sswitch__ and __nswitch__ switch/case constructs from [Switch::Plain](http://search.cpan.org/perldoc?Switch::Plain)
 - [true](http://search.cpan.org/perldoc?true).pm so you can skip adding '1;' to all of your modules
 
 If you import the tag `autobox_lists`, ARRAY and HASH type references are autoboxed

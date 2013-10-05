@@ -1,5 +1,10 @@
 Revision history for Perl module Defaults::Modern
 
+0.006001 2013-10-04
+
+  - Updated for List::Objects::WithUtils-2;
+    all object constructors are now imported
+
 0.005002 2013-09-15
 
   - Compat fix wrt. Function::Parameters-1.0301
