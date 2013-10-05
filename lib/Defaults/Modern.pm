@@ -83,17 +83,15 @@ sub import {
 
   # External functionality
 
-  state $reify = sub {
-    state $guard = do { require Type::Utils };
-    Type::Utils::dwim_type($_[0], for => $_[1])
-  };
-
   state $fp_defaults = +{
     strict                => 1,
     default_arguments     => 1,
     named_parameters      => 1,
     types                 => 1,
-    reify_type            => $reify,
+    reify_type            => sub {
+      state $guard = do { require Type::Utils };
+      Type::Utils::dwim_type($_[0], for => $_[1])
+    },
   };
 
   Function::Parameters->import::into( $pkg,
@@ -124,9 +122,7 @@ sub import {
   # Types
   state $typelibs = [ qw/
     Types::Standard
-
     Types::Path::Tiny
-
     List::Objects::Types
   / ];
 
