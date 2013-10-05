@@ -43,7 +43,7 @@ sub import {
   };
 
   my %params = map {; 
-    my $opt = lc($_ =~ s/^://r);
+    my $opt = lc($_ =~ s/^(?:-|:)//r);
     Carp::croak "$class does not export $opt" 
       unless $known->{$opt};
     $opt => 1
