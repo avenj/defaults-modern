@@ -126,12 +126,16 @@ sub import {
   List::Objects::Types->import::into($pkg, '-all');
   Types::Path::Tiny->import::into($pkg, '-all');
 
-  my @typelibs = qw/
+  state $typelibs = [ qw/
     Types::Standard
+
+    Types::LoadableClass
     Types::Path::Tiny
+
     List::Objects::Types
-  /;
-  for my $typelib (@typelibs) {
+  / ];
+
+  for my $typelib (@$typelibs) {
     try {
       Type::Registry->for_class($pkg)->add_types($typelib);
     } catch {
@@ -234,7 +238,7 @@ B<blessed>, B<reftype>, and B<weaken> utilities from L<Scalar::Util>
 
 =item *
 
-All of the L<List::Objects::WithUtils object constructors (B<array>,
+All of the L<List::Objects::WithUtils> object constructors (B<array>,
 B<array_of>, B<immarray>, B<immarray_of>, B<hash>, B<hash_of>, B<immhash>,
 B<immhash_of>)
 
@@ -244,9 +248,9 @@ B<fun> and B<method> keywords from L<Function::Parameters>
 
 =item *
 
-The full L<Types::Standard> set and L<List::Objects::Types>, which are useful
-in combination with L<Function::Parameters> (see the L</SYNOPSIS> and
-L<Function::Parameters> POD)
+The full L<Types::Standard> set, L<Types::LoadableClass>, and
+L<List::Objects::Types> -- useful in combination with
+L<Function::Parameters> (see the L</SYNOPSIS> and L<Function::Parameters> POD)
 
 =item *
 
@@ -267,11 +271,11 @@ A B<define> keyword for defining constants based on L<PerlX::Define>
 
 =item *
 
-The C<|M|> match operator from L<match::simple>
+The B<|M|> match operator from L<match::simple>
 
 =item *
 
-The C<sswitch> and C<nswitch> switch/case constructs from L<Switch::Plain>
+The B<sswitch> and B<nswitch> switch/case constructs from L<Switch::Plain>
 
 =item *
 
