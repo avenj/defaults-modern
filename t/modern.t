@@ -75,7 +75,7 @@ ok $@, 'switch not imported ok';
 fun calc (Int $x, Num $y) { $x + $y }
 ok calc( 1, 0.5 ) == 1.5, 'Function::Parameters imported ok';
 
-# Switch::Plain;
+# Switch::Plain
 sswitch ('foo') {
   case 'foo': { ok 1, 'Switch::Plain imported ok' }
 }
