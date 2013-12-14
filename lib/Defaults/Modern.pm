@@ -288,9 +288,9 @@ L<true>.pm so you can skip adding '1;' to all of your modules
 
 =back
 
-If you want to automatically load (with the '-all' import tag) and register
-other L<Type::Registry> compatible libraries (see L<Type::Library>), they can
-be specified at import time:
+If you want to automatically load (shown here with the '-all' import tag as
+well) and register other L<Type::Registry> compatible libraries (see
+L<Type::Library>), they can be specified at import time:
 
   use Defaults::Modern
     -all,
