@@ -133,4 +133,19 @@ package My::Bar {
 define FOO = 'bar';
 ok FOO eq 'bar', 'define ok';
 
+# extra typelibs
+{ package TypedFoo;
+  use Test::More;
+  use Defaults::Modern
+    -all,
+    -with_types => [ 'TypeLib' ];
+
+  fun takes_foo (FooType $foo) {
+    ok $foo eq 'foo', 'extra typelibs registered ok';
+  }
+  takes_foo('foo');
+  eval {; takes_foo('bar') };
+  ok $@, 'extra typelibs ok';
+}
+
 done_testing;
