@@ -140,6 +140,7 @@ ok FOO eq 'bar', 'define ok';
     -all,
     -with_types => [ 'TypeLib' ];
 
+  ok []->count == 0, '-all import tag ok';
   fun takes_foo (FooType $foo) {
     ok $foo eq 'foo', 'extra typelibs registered ok';
   }
