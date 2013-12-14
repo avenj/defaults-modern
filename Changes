@@ -1,5 +1,11 @@
 Revision history for Perl module Defaults::Modern
 
+0.007001 2013-12-14
+
+  - Support for automatically registering other type libraries
+
+  - Support for '-foo' style import tags
+
 0.006001 2013-10-04
 
   - Updated for List::Objects::WithUtils-2;

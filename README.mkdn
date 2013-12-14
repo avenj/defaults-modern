@@ -79,6 +79,14 @@ from [Types::Path::Tiny](http://search.cpan.org/perldoc?Types::Path::Tiny)
 - The __sswitch__ and __nswitch__ switch/case constructs from [Switch::Plain](http://search.cpan.org/perldoc?Switch::Plain)
 - [true](http://search.cpan.org/perldoc?true).pm so you can skip adding '1;' to all of your modules
 
+If you want to automatically load (with the '-all' import tag) and register
+other [Type::Registry](http://search.cpan.org/perldoc?Type::Registry) compatible libraries (see [Type::Library](http://search.cpan.org/perldoc?Type::Library)), they can
+be specified at import time:
+
+    use Defaults::Modern
+      -all,
+      -with_types => [ 'Types::Mine' ],
+
 If you import the tag `autobox_lists`, ARRAY and HASH type references are autoboxed
 via [List::Objects::WithUtils](http://search.cpan.org/perldoc?List::Objects::WithUtils):
 
