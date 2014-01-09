@@ -57,7 +57,7 @@ sub import {
       next PARAM
     }
 
-    my $opt = lc($item =~ s/^(?:-|:)//r);
+    my $opt = lc($item =~ s/^(?:[-:])//r);
     Carp::croak "$class does not export $opt" unless $known->{$opt};
 
     if ($opt eq 'all') {
