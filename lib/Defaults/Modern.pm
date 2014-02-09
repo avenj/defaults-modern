@@ -84,6 +84,9 @@ sub import {
   strict->import;
   warnings->import(FATAL => 'all');
   warnings->unimport('once');
+  if ($] >= 5.018) {
+    warnings->unimport('experimental');
+  }
 
   bareword::filehandles->unimport;
   indirect->unimport(':fatal');
@@ -144,6 +147,7 @@ sub import {
     try {
       Type::Registry->for_class($pkg)->add_types($typelib);
     } catch {
+      # Usually conflicts; whine but prefer user's previous imports:
       Carp::carp($_)
     };
   }
