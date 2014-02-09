@@ -1,5 +1,11 @@
 Revision history for Perl module Defaults::Modern
 
+0.007002 2014-02-09
+
+  - Disable 'experimental' warnings on perl-5.18+
+
+  - POD fixes
+
 0.007001 2013-12-14
 
   - Support for automatically registering other type libraries
