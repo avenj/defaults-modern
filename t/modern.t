@@ -36,6 +36,7 @@ ok 'foo' |M| \@foo, 'match::simple imported ok';
 # true
 use lib 't/inc';
 use_ok 'PkgTrue';
+ok 'PkgTrue'->can('foo'), 'true.pm imported ok';
 
 # no indirect
 package T { 
