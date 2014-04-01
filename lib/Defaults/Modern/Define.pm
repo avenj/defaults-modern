@@ -1,4 +1,5 @@
 package Defaults::Modern::Define;
+
 use strict; use warnings FATAL => 'all';
 
 # Forked from TOBYINK's PerlX::Define, copyright Toby Inkster
@@ -23,12 +24,12 @@ sub import {
     return
   }
 
-  Keyword::Simple::define('define' => sub {
+  Keyword::Simple::define( define => sub {
     my ($line) = @_;
     my ($ws1, $name, $ws2, $equals) =
       ($$line =~ m{\A([\n\s]*)(\w+)([\n\s]*)(=\>?)}s)
         or Carp::croak("Syntax error near 'define'");
-    my $len = length $ws1 . $name . $ws2 . $equals;
+    my $len = length join '', $ws1, $name, $ws2, $equals;
     substr $$line, 0, $len, ";use Defaults::Modern::Define $name => ";
   });
 }
