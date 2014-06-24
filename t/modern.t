@@ -149,5 +149,20 @@ ok FOO eq 'bar', 'define ok';
   eval {; takes_foo('bar') };
   ok $@, 'extra typelibs ok';
 }
+{ package TypedFooStr;
+  use Test::More;
+  use Defaults::Modern
+    -all,
+    -with_types => 'TypeLib';
+
+  ok []->count == 0, '-all import tag ok';
+  fun takes_foo (FooType $foo) {
+    ok $foo eq 'foo', 'extra typelibs registered ok';
+  }
+  takes_foo('foo');
+  eval {; takes_foo('bar') };
+  ok $@, 'extra typelibs ok';
+}
+
 
 done_testing;
