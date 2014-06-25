@@ -1,5 +1,13 @@
 Revision history for Perl module Defaults::Modern
 
+0.008001 2014-06-24
+
+  - Allow passing a single string via '-with_types'
+
+  - Depend on newer Type::Tiny
+
+  - Recommend match::simple::XS
+
 0.007002 2014-02-09
 
   - Disable 'experimental' warnings on perl-5.18+
