@@ -1,4 +1,5 @@
 package Defaults::Modern;
+
 use v5.14;
 
 use strict; use warnings FATAL => 'all';
@@ -8,6 +9,8 @@ no indirect ':fatal';
 
 use Module::Runtime 'use_package_optimistically';
 use Try::Tiny;
+use Import::Into;
+
 
 use Carp    ();
 use feature ();
@@ -29,8 +32,6 @@ use Type::Registry            ();
 use Type::Utils               ();
 use List::Objects::Types      ();
 
-
-use Import::Into;
 
 sub import {
   my $class = shift;
@@ -131,7 +132,9 @@ sub import {
   );
 
   Path::Tiny->import::into($pkg, 'path');
+
   PerlX::Maybe->import::into($pkg, qw/maybe provided/);
+
   Try::Tiny->import::into($pkg);
   Switch::Plain->import;
 
@@ -304,6 +307,10 @@ L<Type::Library>), they can be specified at import time:
     -all,
     -with_types => [ 'Types::Mine' ],
 
+(This feature is unnecessary with L<Type::Tiny> version 1.x and higher, which
+will automatically register L<Type::Library>-based types in the caller's
+L<Type::Registry>.)
+
 If you import the tag C<autobox_lists>, ARRAY and HASH type references are autoboxed
 via L<List::Objects::WithUtils>:
 
@@ -313,9 +320,8 @@ via L<List::Objects::WithUtils>:
 L<Moo> and L<MooX::late> are depended upon in order to guarantee their
 availability, but not automatically imported:
 
-  use Moo;
-  use MooX::late;
   use Defaults::Modern;
+  use Moo;  use MooX::late;
 
   has foo => (
     is  => 'ro',
