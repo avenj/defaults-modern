@@ -151,12 +151,13 @@ sub import {
 
   for my $typelib (@$mytypelibs, @$typelibs) {
     use_package_optimistically($typelib)->import::into($pkg, -all);
-    try {
-      Type::Registry->for_class($pkg)->add_types($typelib);
-    } catch {
+# Irrelevant with Type::Tiny-1.x ->
+#    try {
+#      Type::Registry->for_class($pkg)->add_types($typelib);
+#    } catch {
       # Usually conflicts; whine but prefer user's previous imports:
-      Carp::carp($_)
-    };
+#      Carp::carp($_)
+#    };
   }
 
   if (defined $params{moo}) {
