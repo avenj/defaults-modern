@@ -86,6 +86,7 @@ sub import {
   );
   
   # Pragmas
+  # FIXME import strictures(2) instead
   strict->import;
   warnings->import(FATAL => 'all');
   warnings->unimport('once');
@@ -308,9 +309,9 @@ L<Type::Library>), they can be specified at import time:
     -all,
     -with_types => [ 'Types::Mine' ],
 
-(This feature is unnecessary with L<Type::Tiny> version 1.x and higher, which
+This feature is unnecessary with L<Type::Tiny> version 1.x and higher, which
 will automatically register L<Type::Library>-based types in the caller's
-L<Type::Registry>.)
+L<Type::Registry>.
 
 If you import the tag C<autobox_lists>, ARRAY and HASH type references are autoboxed
 via L<List::Objects::WithUtils>:
