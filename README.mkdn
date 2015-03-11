@@ -57,8 +57,9 @@ Yet another approach to writing Perl in a modern style.
 
 When you `use Defaults::Modern`, you get:
 
-- [strict](https://metacpan.org/pod/strict) and fatal [warnings](https://metacpan.org/pod/warnings) except for `once`; additionally disallow
-[bareword::filehandles](https://metacpan.org/pod/bareword::filehandles) and [indirect](https://metacpan.org/pod/indirect) method calls
+- [strictures](https://metacpan.org/pod/strictures) (version 2), which enables [strict](https://metacpan.org/pod/strict) and makes most warnings
+fatal; additionally [bareword::filehandles](https://metacpan.org/pod/bareword::filehandles) and [indirect](https://metacpan.org/pod/indirect) method calls are
+disallowed explicitly (not just in development environments)
 - The `v5.14` feature set (`state`, `say`, `unicode_strings`, `array_base`) -- except for
 `switch`, which is deprecated in newer perls
 - **carp**, **croak**, and **confess** error reporting tools from [Carp](https://metacpan.org/pod/Carp)
@@ -87,6 +88,10 @@ well) and register other [Type::Registry](https://metacpan.org/pod/Type::Registr
       -all,
       -with_types => [ 'Types::Mine' ],
 
+This feature is unnecessary with [Type::Tiny](https://metacpan.org/pod/Type::Tiny) version 1.x and higher, which
+will automatically register [Type::Library](https://metacpan.org/pod/Type::Library)-based types in the caller's
+[Type::Registry](https://metacpan.org/pod/Type::Registry).
+
 If you import the tag `autobox_lists`, ARRAY and HASH type references are autoboxed
 via [List::Objects::WithUtils](https://metacpan.org/pod/List::Objects::WithUtils):
 
@@ -96,9 +101,8 @@ via [List::Objects::WithUtils](https://metacpan.org/pod/List::Objects::WithUtils
 [Moo](https://metacpan.org/pod/Moo) and [MooX::late](https://metacpan.org/pod/MooX::late) are depended upon in order to guarantee their
 availability, but not automatically imported:
 
-    use Moo;
-    use MooX::late;
     use Defaults::Modern;
+    use Moo;  use MooX::late;
 
     has foo => (
       is  => 'ro',

@@ -1,5 +1,11 @@
 Revision history for Perl module Defaults::Modern
 
+0.009001 2015-03-11
+
+  - Import 'strictures 2' for saner warnings behavior
+
+  - Depend on Type::Tiny-1+ for saner Type::Registry behavior
+
 0.008001 2014-06-24
 
   - Allow passing a single string via '-with_types'
