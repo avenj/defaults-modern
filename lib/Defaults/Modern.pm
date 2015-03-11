@@ -2,10 +2,9 @@ package Defaults::Modern;
 
 use v5.14;
 
-use strict; use warnings FATAL => 'all';
-
-no bareword::filehandles;
+use strictures 2;
 no indirect ':fatal';
+no bareword::filehandles;
 
 use Module::Runtime 'use_package_optimistically';
 use Try::Tiny;
@@ -86,16 +85,13 @@ sub import {
   );
   
   # Pragmas
-  # FIXME import strictures(2) instead
-  strict->import;
-  warnings->import(FATAL => 'all');
+  strictures->import::into($pkg, version => 2);
+  bareword::filehandles->unimport;
+  indirect->unimport(':fatal');
   warnings->unimport('once');
   if ($] >= 5.018) {
     warnings->unimport('experimental');
   }
-
-  bareword::filehandles->unimport;
-  indirect->unimport(':fatal');
 
   feature->import(':5.14');
   feature->unimport('switch');
@@ -238,8 +234,9 @@ When you C<use Defaults::Modern>, you get:
 
 =item *
 
-L<strict> and fatal L<warnings> except for C<once>; additionally disallow
-L<bareword::filehandles> and L<indirect> method calls
+L<strictures> (version 2), which enables L<strict> and makes most warnings
+fatal; additionally L<bareword::filehandles> and L<indirect> method calls are
+disallowed explicitly (not just in development environments)
 
 =item *
 
