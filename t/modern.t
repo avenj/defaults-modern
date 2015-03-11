@@ -143,7 +143,7 @@ ok FOO eq 'bar', 'define ok';
 
   ok []->count == 0, '-all import tag ok';
   fun takes_foo (FooType $foo) {
-    ok $foo eq 'foo', 'extra typelibs registered ok';
+    ok $foo eq 'foo', 'extra typelib (-with_types)  registered ok';
   }
   takes_foo('foo');
   eval {; takes_foo('bar') };
@@ -157,12 +157,24 @@ ok FOO eq 'bar', 'define ok';
 
   ok []->count == 0, '-all import tag ok';
   fun takes_foo (FooType $foo) {
-    ok $foo eq 'foo', 'extra typelibs registered ok';
+    ok $foo eq 'foo', 'extra typelib (as string) registered ok';
   }
   takes_foo('foo');
   eval {; takes_foo('bar') };
   ok $@, 'extra typelibs ok';
 }
+{ package TypedFooAutoRegistry;
+  use Test::More;
+  use Defaults::Modern -all;
+  use TypeLib -types;
 
+  ok []->count == 0, '-all import tag ok';
+  fun takes_foo (FooType $foo) {
+    ok $foo eq 'foo', 'extra typelib (plain import) registered ok';
+  }
+  takes_foo('foo');
+  eval {; takes_foo('bar') };
+  ok $@, 'extra typelibs ok';
+}
 
 done_testing;
