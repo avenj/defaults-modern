@@ -1,6 +1,6 @@
 package Defaults::Modern::Define;
 
-use strict; use warnings FATAL => 'all';
+use strictures 2;
 
 # Forked from TOBYINK's PerlX::Define, copyright Toby Inkster
 #  (... to avoid the Moops dep)
