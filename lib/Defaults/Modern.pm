@@ -162,8 +162,6 @@ sub import {
     Moo->import::into($pkg);
     require MooX::late;
     MooX::late->import::into($pkg);
-    require MooX::TypeTiny;
-    MooX::TypeTiny->import::into($pkg);
   }
 
   $class
@@ -334,22 +332,6 @@ availability, but not automatically imported:
 (If you're building classes, you may want to look into L<namespace::clean> /
 L<namespace::sweep> or similar -- L<Defaults::Modern> imports an awful lot of
 Stuff. L<Moops> may be nicer to work with.)
-
-=begin comment
-
- ## Undocumented for now, because Moops is a better solution.
-
-If you import C<Moo>, you get L<Moo>, L<MooX::late>, and L<MooX::TypeTiny>:
-
-  use Defaults::Modern 'Moo';
-  has foo => (
-    is      => 'ro',
-    isa     => ArrayObj,
-    coerce  => 1,
-    default => sub { [] },
-  );
-
-=end comment
 
 =head1 SEE ALSO
 
