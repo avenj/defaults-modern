@@ -162,6 +162,8 @@ sub import {
     Moo->import::into($pkg);
     require MooX::late;
     MooX::late->import::into($pkg);
+    require MooX::TypeTiny;
+    MooX::TypeTiny->import::into($pkg);
   }
 
   $class
@@ -337,8 +339,7 @@ Stuff. L<Moops> may be nicer to work with.)
 
  ## Undocumented for now, because Moops is a better solution.
 
-If you import C<Moo>, you get L<Moo> and L<MooX::late> (but you should really
-be using L<Moops> instead):
+If you import C<Moo>, you get L<Moo>, L<MooX::late>, and L<MooX::TypeTiny>:
 
   use Defaults::Modern 'Moo';
   has foo => (
