@@ -132,7 +132,9 @@ package My::Bar {
 
 # define
 define FOO = 'bar';
-ok FOO eq 'bar', 'define ok';
+ok FOO eq 'bar', 'define (1) ok';
+define BAR => 'baz';
+ok BAR eq 'baz', 'define (2) ok';
 
 # extra typelibs
 { package TypedFoo;
