@@ -195,7 +195,6 @@ Defaults::Modern - Yet another approach to modernistic Perl
 
     # Moo(se) with types ->
     use Moo;
-    use MooX::late;
 
     has myarray => (
       isa => ArrayObj,
@@ -316,11 +315,11 @@ via L<List::Objects::WithUtils>:
   use Defaults::Modern 'autobox_lists';
   my $itr = [ 1 .. 10 ]->natatime(2);
 
-L<Moo> and L<MooX::late> are depended upon in order to guarantee their
-availability, but not automatically imported:
+L<Moo> version 2+ is depended upon in order to guarantee availability, but not
+automatically imported:
 
   use Defaults::Modern;
-  use Moo;  use MooX::late;
+  use Moo;
 
   has foo => (
     is  => 'ro',
