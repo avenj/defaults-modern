@@ -240,7 +240,10 @@ disallowed explicitly (not just in development environments)
 =item *
 
 The C<v5.14> feature set (C<state>, C<say>, C<unicode_strings>, C<array_base>) -- except for
-C<switch>, which is deprecated in newer perls
+C<switch>, which is deprecated in newer perls (and L<Switch::Plain> is
+provided anyway).
+
+C<experimental> warnings are also disabled on C<v5.18+>.
 
 =item *
 
