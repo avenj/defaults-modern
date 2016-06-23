@@ -27,7 +27,6 @@ Defaults::Modern - Yet another approach to modernistic Perl
         isa => ArrayObj,
         is  => 'ro',
         writer  => '_set_myarray',
-        # MooX::late allows us to coerce from an ArrayRef:
         coerce  => 1,
         default => sub { [] },
       );
