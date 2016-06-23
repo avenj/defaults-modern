@@ -160,8 +160,6 @@ sub import {
   if (defined $params{moo}) {
     require Moo;
     Moo->import::into($pkg);
-    require MooX::late;
-    MooX::late->import::into($pkg);
   }
 
   $class
@@ -200,7 +198,6 @@ Defaults::Modern - Yet another approach to modernistic Perl
       isa => ArrayObj,
       is  => 'ro',
       writer  => '_set_myarray',
-      # MooX::late allows us to coerce from an ArrayRef:
       coerce  => 1,
       default => sub { [] },
     );
