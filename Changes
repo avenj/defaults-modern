@@ -1,5 +1,14 @@
 Revision history for Perl module Defaults::Modern
 
+0.009002 2016-06-23
+
+  - Depend on newer Path::Tiny, Function::Parameters,
+    List::Objects::WithUtils, Try::Tiny, Switch::Plain
+
+  - Recommend dependency MooX::TypeTiny
+
+  - Switch to cpanfile packaging, ReadmeAnyFromPod
+
 0.009001 2015-03-11
 
   - Import 'strictures 2' for saner warnings behavior

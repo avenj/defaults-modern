@@ -22,7 +22,6 @@ Defaults::Modern - Yet another approach to modernistic Perl
 
       # Moo(se) with types ->
       use Moo;
-      use MooX::late;
 
       has myarray => (
         isa => ArrayObj,
@@ -61,7 +60,11 @@ When you `use Defaults::Modern`, you get:
 fatal; additionally [bareword::filehandles](https://metacpan.org/pod/bareword::filehandles) and [indirect](https://metacpan.org/pod/indirect) method calls are
 disallowed explicitly (not just in development environments)
 - The `v5.14` feature set (`state`, `say`, `unicode_strings`, `array_base`) -- except for
-`switch`, which is deprecated in newer perls
+`switch`, which is deprecated in newer perls (and [Switch::Plain](https://metacpan.org/pod/Switch::Plain) is
+provided anyway).
+
+    `experimental` warnings are also disabled on `v5.18+`.
+
 - **carp**, **croak**, and **confess** error reporting tools from [Carp](https://metacpan.org/pod/Carp)
 - **blessed**, **reftype**, and **weaken** utilities from [Scalar::Util](https://metacpan.org/pod/Scalar::Util)
 - All of the [List::Objects::WithUtils](https://metacpan.org/pod/List::Objects::WithUtils) object constructors (**array**,
@@ -98,11 +101,11 @@ via [List::Objects::WithUtils](https://metacpan.org/pod/List::Objects::WithUtils
     use Defaults::Modern 'autobox_lists';
     my $itr = [ 1 .. 10 ]->natatime(2);
 
-[Moo](https://metacpan.org/pod/Moo) and [MooX::late](https://metacpan.org/pod/MooX::late) are depended upon in order to guarantee their
-availability, but not automatically imported:
+[Moo](https://metacpan.org/pod/Moo) version 2+ is depended upon in order to guarantee availability, but not
+automatically imported:
 
     use Defaults::Modern;
-    use Moo;  use MooX::late;
+    use Moo;
 
     has foo => (
       is  => 'ro',
@@ -144,7 +147,7 @@ most visible portions of which come from the following modules:
 
 # AUTHOR
 
-Jon Portnoy <avenj@cobaltirc.org>
+Jon Portnoy &lt;avenj@cobaltirc.org>
 
 Licensed under the same terms as Perl.
 
