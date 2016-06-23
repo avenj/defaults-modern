@@ -308,7 +308,7 @@ automatically imported:
 
   use Defaults::Modern;
   use Moo;
-  use MooX::TypeTiny;  # recommended for faster inline type checks
+  use MooX::TypeTiny;   # recommended for faster inline type checks
 
   has foo => (
     is  => 'ro',
@@ -317,9 +317,14 @@ automatically imported:
     default => sub { [] },
   );
 
-(If you're building classes, you may want to look into L<namespace::clean> /
+If you're building classes, you may want to look into L<namespace::clean> /
 L<namespace::sweep> or similar -- L<Defaults::Modern> imports an awful lot of
-Stuff. L<Moops> may be nicer to work with.)
+Stuff:
+
+  use Defaults::Modern;
+  use namespace::clean;
+  use Moo;
+  # ...
 
 =head1 SEE ALSO
 
