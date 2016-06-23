@@ -297,18 +297,6 @@ L<true>.pm so you can skip adding '1;' to all of your modules
 
 =back
 
-If you want to automatically load (shown here with the '-all' import tag, as
-well) and register other L<Type::Registry> compatible libraries (see
-L<Type::Library>), they can be specified at import time:
-
-  use Defaults::Modern
-    -all,
-    -with_types => [ 'Types::Mine' ],
-
-This feature is unnecessary with L<Type::Tiny> version 1.x and higher, which
-will automatically register L<Type::Library>-based types in the caller's
-L<Type::Registry>.
-
 If you import the tag C<autobox_lists>, ARRAY and HASH type references are autoboxed
 via L<List::Objects::WithUtils>:
 
@@ -320,6 +308,7 @@ automatically imported:
 
   use Defaults::Modern;
   use Moo;
+  use MooX::TypeTiny;  # recommended for faster inline type checks
 
   has foo => (
     is  => 'ro',
