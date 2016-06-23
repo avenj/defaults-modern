@@ -2,6 +2,10 @@ package Defaults::Modern::Define;
 
 use strictures 2;
 
+=for Pod::Coverage .*
+
+=cut
+
 # Forked from TOBYINK's PerlX::Define, copyright Toby Inkster
 #  (... to avoid the Moops dep)
 # This probably goes away if PerlX::Define gets pulled out later.
