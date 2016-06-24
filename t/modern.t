@@ -137,34 +137,41 @@ define BAR => 'baz';
 ok BAR eq 'baz', 'define (2) ok';
 
 # extra typelibs
-{ package TypedFoo;
-  use Test::More;
-  use Defaults::Modern
-    -all,
-    -with_types => [ 'TypeLib' ];
 
-  ok []->count == 0, '-all import tag ok';
-  fun takes_foo (FooType $foo) {
-    ok $foo eq 'foo', 'extra typelib (-with_types)  registered ok';
-  }
-  takes_foo('foo');
-  eval {; takes_foo('bar') };
-  ok $@, 'extra typelibs ok';
-}
-{ package TypedFooStr;
-  use Test::More;
-  use Defaults::Modern
-    -all,
-    -with_types => 'TypeLib';
+=for comment
 
-  ok []->count == 0, '-all import tag ok';
-  fun takes_foo (FooType $foo) {
-    ok $foo eq 'foo', 'extra typelib (as string) registered ok';
+# deprecated -with_types opt
+  { package TypedFoo;
+    use Test::More;
+    use Defaults::Modern
+      -all,
+      -with_types => [ 'TypeLib' ];
+
+    ok []->count == 0, '-all import tag ok';
+    fun takes_foo (FooType $foo) {
+      ok $foo eq 'foo', 'extra typelib (-with_types)  registered ok';
+    }
+    takes_foo('foo');
+    eval {; takes_foo('bar') };
+    ok $@, 'extra typelibs ok';
   }
-  takes_foo('foo');
-  eval {; takes_foo('bar') };
-  ok $@, 'extra typelibs ok';
-}
+  { package TypedFooStr;
+    use Test::More;
+    use Defaults::Modern
+      -all,
+      -with_types => 'TypeLib';
+
+    ok []->count == 0, '-all import tag ok';
+    fun takes_foo (FooType $foo) {
+      ok $foo eq 'foo', 'extra typelib (as string) registered ok';
+    }
+    takes_foo('foo');
+    eval {; takes_foo('bar') };
+    ok $@, 'extra typelibs ok';
+  }
+
+=cut
+
 { package TypedFooAutoRegistry;
   use Test::More;
   use Defaults::Modern -all;

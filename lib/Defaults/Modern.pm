@@ -50,6 +50,11 @@ sub import {
   PARAM: for my $item (@_) {
     my $current = $idx++;
     if ($item eq 'with_types' || $item eq '-with_types') {
+      # backwards-compat ; may go away someday
+      Carp::carp(
+        "'with_types' option is deprecated; ",
+        "'use TYPELIB -all' after 'use Defaults::Modern;' instead"
+      );
       $typelibs = $_[$idx];
       splice @_, $current, 2;
       if (ref $typelibs) {
@@ -62,7 +67,7 @@ sub import {
     }
 
     my $opt = lc($item =~ s/^(?:[-:])//r);
-    Carp::croak "$class does not export $opt" unless $known->{$opt};
+    Carp::croak("$class does not export $opt") unless $known->{$opt};
 
     if ($opt eq 'all') {
       $params{$_} = 1 for grep {; $_ ne 'all' } keys %$known;
@@ -112,7 +117,7 @@ sub import {
     },
   };
 
-  Function::Parameters->import::into( $pkg,
+  Function::Parameters->import(
     +{
       fun => {
         name                  => 'optional',
