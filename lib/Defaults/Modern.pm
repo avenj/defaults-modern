@@ -195,11 +195,11 @@ Defaults::Modern - Yet another approach to modernistic Perl
     use Moo;
 
     has myarray => (
-      isa => ArrayObj,
-      is  => 'ro',
+      is      => 'ro',
+      isa     => ArrayObj,
       writer  => '_set_myarray',
       coerce  => 1,
-      default => sub { [] },
+      builder => sub { [] },
     );
 
     # Method with optional positional param and implicit $self ->
