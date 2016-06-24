@@ -24,11 +24,11 @@ Defaults::Modern - Yet another approach to modernistic Perl
       use Moo;
 
       has myarray => (
-        isa => ArrayObj,
-        is  => 'ro',
+        is      => 'ro',
+        isa     => ArrayObj,
         writer  => '_set_myarray',
         coerce  => 1,
-        default => sub { [] },
+        builder => sub { [] },
       );
 
       # Method with optional positional param and implicit $self ->
@@ -69,7 +69,9 @@ provided anyway).
 - All of the [List::Objects::WithUtils](https://metacpan.org/pod/List::Objects::WithUtils) object constructors (**array**,
 **array\_of**, **immarray**, **immarray\_of**, **hash**, **hash\_of**, **immhash**,
 **immhash\_of**)
-- **fun** and **method** keywords from [Function::Parameters](https://metacpan.org/pod/Function::Parameters)
+- **fun** and **method** keywords from [Function::Parameters](https://metacpan.org/pod/Function::Parameters) configured to
+accept [Type::Tiny](https://metacpan.org/pod/Type::Tiny) types (amongst other reasonably sane defaults including
+arity checks)
 - The full [Types::Standard](https://metacpan.org/pod/Types::Standard) set and [List::Objects::Types](https://metacpan.org/pod/List::Objects::Types) -- useful in
 combination with [Function::Parameters](https://metacpan.org/pod/Function::Parameters) (see the ["SYNOPSIS"](#synopsis) and
 [Function::Parameters](https://metacpan.org/pod/Function::Parameters) POD)
@@ -82,18 +84,6 @@ from [Types::Path::Tiny](https://metacpan.org/pod/Types::Path::Tiny)
 - The **sswitch** and **nswitch** switch/case constructs from [Switch::Plain](https://metacpan.org/pod/Switch::Plain)
 - [true](https://metacpan.org/pod/true).pm so you can skip adding '1;' to all of your modules
 
-If you want to automatically load (shown here with the '-all' import tag, as
-well) and register other [Type::Registry](https://metacpan.org/pod/Type::Registry) compatible libraries (see
-[Type::Library](https://metacpan.org/pod/Type::Library)), they can be specified at import time:
-
-    use Defaults::Modern
-      -all,
-      -with_types => [ 'Types::Mine' ],
-
-This feature is unnecessary with [Type::Tiny](https://metacpan.org/pod/Type::Tiny) version 1.x and higher, which
-will automatically register [Type::Library](https://metacpan.org/pod/Type::Library)-based types in the caller's
-[Type::Registry](https://metacpan.org/pod/Type::Registry).
-
 If you import the tag `autobox_lists`, ARRAY and HASH type references are autoboxed
 via [List::Objects::WithUtils](https://metacpan.org/pod/List::Objects::WithUtils):
 
@@ -105,6 +95,7 @@ automatically imported:
 
     use Defaults::Modern;
     use Moo;
+    use MooX::TypeTiny;   # recommended for faster inline type checks
 
     has foo => (
       is  => 'ro',
@@ -113,9 +104,14 @@ automatically imported:
       default => sub { [] },
     );
 
-(If you're building classes, you may want to look into [namespace::clean](https://metacpan.org/pod/namespace::clean) /
+If you're building classes, you may want to look into [namespace::clean](https://metacpan.org/pod/namespace::clean) /
 [namespace::sweep](https://metacpan.org/pod/namespace::sweep) or similar -- [Defaults::Modern](https://metacpan.org/pod/Defaults::Modern) imports an awful lot of
-Stuff. [Moops](https://metacpan.org/pod/Moops) may be nicer to work with.)
+Stuff:
+
+    use Defaults::Modern;
+    use Moo;
+    use namespace::clean;
+    # ...
 
 # SEE ALSO
 

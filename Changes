@@ -1,5 +1,10 @@
 Revision history for Perl module Defaults::Modern
 
+0.010001 2016-06-24
+
+  - Deprecate '-with_types' import argument
+    (no longer needed with Type::Tiny-1+)
+
 0.009003 2016-06-23
 
   - No longer need MooX::late (Moo-2+ provides 'coerce =>' support)
