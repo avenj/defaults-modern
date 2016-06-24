@@ -263,7 +263,9 @@ B<immhash_of>)
 
 =item *
 
-B<fun> and B<method> keywords from L<Function::Parameters>
+B<fun> and B<method> keywords from L<Function::Parameters> configured to
+accept L<Type::Tiny> types (amongst other reasonably sane defaults including
+arity checks)
 
 =item *
 
@@ -327,8 +329,8 @@ L<namespace::sweep> or similar -- L<Defaults::Modern> imports an awful lot of
 Stuff:
 
   use Defaults::Modern;
-  use namespace::clean;
   use Moo;
+  use namespace::clean;
   # ...
 
 =head1 SEE ALSO
