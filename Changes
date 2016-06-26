@@ -1,5 +1,9 @@
 Revision history for Perl module Defaults::Modern
 
+0.011001 2016-06-26
+
+  - Add qc, qcw, and qc_to keywords from Quote::Code
+
 0.010001 2016-06-24
 
   - Deprecate '-with_types' import argument

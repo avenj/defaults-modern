@@ -82,6 +82,8 @@ from [Types::Path::Tiny](https://metacpan.org/pod/Types::Path::Tiny)
 - A **define** keyword for defining constants based on [PerlX::Define](https://metacpan.org/pod/PerlX::Define)
 - The **|M|** match operator from [match::simple](https://metacpan.org/pod/match::simple)
 - The **sswitch** and **nswitch** switch/case constructs from [Switch::Plain](https://metacpan.org/pod/Switch::Plain)
+- The **qc**, **qcw**, and **qc\_to** code-interpolating keywords from
+[Quote::Code](https://metacpan.org/pod/Quote::Code) (as of Defaults::Modern `v0.11.1`)
 - [true](https://metacpan.org/pod/true).pm so you can skip adding '1;' to all of your modules
 
 If you import the tag `autobox_lists`, ARRAY and HASH type references are autoboxed
@@ -129,6 +131,8 @@ most visible portions of which come from the following modules:
 [Path::Tiny](https://metacpan.org/pod/Path::Tiny)
 
 [PerlX::Maybe](https://metacpan.org/pod/PerlX::Maybe)
+
+[Quote::Code](https://metacpan.org/pod/Quote::Code)
 
 [Scalar::Util](https://metacpan.org/pod/Scalar::Util)
 
