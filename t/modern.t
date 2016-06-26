@@ -18,10 +18,21 @@ can_ok __PACKAGE__, qw/
 
 #  Path::Tiny
 can_ok __PACKAGE__, qw/ path /;
-ok is_Path(path('/')), 'Path::Tiny and Types for same ok';
+ok is_Path(path('/')), 'Path::Tiny and Types for same';
 
 #  PerlX::Maybe
 can_ok __PACKAGE__, qw/ maybe provided /;
+
+#  Quote::Code
+my $qcstr = qc'2+2 = {2+2}';
+cmp_ok $qcstr, 'eq', '2+2 = 4', 'qc';
+my @qcwlist = qcw/ foo {2+2} / ;
+is_deeply \@qcwlist, ['foo', 4], 'qcw';
+my $qcto = qc_to <<'EOT';
+bar
+#{2+2}
+EOT
+cmp_ok $qcto, 'eq', "bar\n4\n", 'qc_to';
 
 #  Scalar::Util
 can_ok __PACKAGE__, qw/ blessed reftype weaken /;

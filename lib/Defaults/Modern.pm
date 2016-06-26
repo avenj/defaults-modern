@@ -22,6 +22,7 @@ use Function::Parameters      ();
 use List::Objects::WithUtils  ();
 use Path::Tiny                ();
 use PerlX::Maybe              ();
+use Quote::Code               ();
 use Scalar::Util              ();
 use Switch::Plain             ();
 
@@ -136,6 +137,8 @@ sub import {
   Path::Tiny->import::into($pkg, 'path');
 
   PerlX::Maybe->import::into($pkg, qw/maybe provided/);
+
+  Quote::Code->import::into($pkg, qw/qc qcw qc_to/);
 
   Try::Tiny->import::into($pkg);
   Switch::Plain->import;
@@ -300,6 +303,11 @@ The B<sswitch> and B<nswitch> switch/case constructs from L<Switch::Plain>
 
 =item *
 
+The B<qc>, B<qcw>, and B<qc_to> code-interpolating keywords from
+L<Quote::Code> (as of Defaults::Modern C<v0.11.1>)
+
+=item *
+
 L<true>.pm so you can skip adding '1;' to all of your modules
 
 =back
@@ -349,6 +357,8 @@ L<match::simple>
 L<Path::Tiny>
 
 L<PerlX::Maybe>
+
+L<Quote::Code>
 
 L<Scalar::Util>
 

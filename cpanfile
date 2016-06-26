@@ -31,6 +31,8 @@ requires "Path::Tiny"               => "0.091";
 requires "PerlX::Maybe"             => "1";
 recommends "PerlX::Maybe::XS"       => "1";
 
+requires "Quote::Code"              => "1.01";
+
 requires "Switch::Plain"            => "0.05";
 
 requires "Try::Tiny"                => "0.24";
