@@ -114,7 +114,7 @@ sub import {
     types                 => 1,
     reify_type            => sub {
       state $guard = do { require Type::Utils };
-      Type::Utils::dwim_type($_[0], for => $_[1])
+      Type::Utils::dwim_type($_[0], for => $_[1] // scalar caller)
     },
   };
 
